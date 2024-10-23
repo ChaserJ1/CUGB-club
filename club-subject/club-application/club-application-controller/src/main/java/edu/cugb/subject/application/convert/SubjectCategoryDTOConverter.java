@@ -6,6 +6,8 @@ import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Author pengjia
  * @Data 2024/10/17 15:19
@@ -17,4 +19,7 @@ public interface SubjectCategoryDTOConverter {
 
     SubjectCategoryBO convertBOToCategory(SubjectCategoryDTO subjectCategoryDTO);
 
+    List<SubjectCategoryDTO> convertBOToDTOList(List<SubjectCategoryBO> subjectCategoryBO);
+
+    SubjectCategoryBO convertDTOToBO(SubjectCategoryDTO subjectCategoryDTO);
 }
