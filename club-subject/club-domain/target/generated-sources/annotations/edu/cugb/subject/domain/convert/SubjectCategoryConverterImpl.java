@@ -2,11 +2,13 @@ package edu.cugb.subject.domain.convert;
 
 import edu.cugb.subject.domain.entity.SubjectCategoryBO;
 import edu.cugb.subject.infra.basic.entity.SubjectCategory;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-17T17:27:20+0800",
+    date = "2024-10-22T13:41:13+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_152 (Oracle Corporation)"
 )
 public class SubjectCategoryConverterImpl implements SubjectCategoryConverter {
@@ -27,5 +29,36 @@ public class SubjectCategoryConverterImpl implements SubjectCategoryConverter {
         subjectCategory.setIsDeleted( subjectCategoryBO.getIsDeleted() );
 
         return subjectCategory;
+    }
+
+    @Override
+    public List<SubjectCategoryBO> convertCategoryToBO(List<SubjectCategory> subjectCategoryList) {
+        if ( subjectCategoryList == null ) {
+            return null;
+        }
+
+        List<SubjectCategoryBO> list = new ArrayList<SubjectCategoryBO>( subjectCategoryList.size() );
+        for ( SubjectCategory subjectCategory : subjectCategoryList ) {
+            list.add( subjectCategoryToSubjectCategoryBO( subjectCategory ) );
+        }
+
+        return list;
+    }
+
+    protected SubjectCategoryBO subjectCategoryToSubjectCategoryBO(SubjectCategory subjectCategory) {
+        if ( subjectCategory == null ) {
+            return null;
+        }
+
+        SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
+
+        subjectCategoryBO.setId( subjectCategory.getId() );
+        subjectCategoryBO.setCategoryName( subjectCategory.getCategoryName() );
+        subjectCategoryBO.setCategoryType( subjectCategory.getCategoryType() );
+        subjectCategoryBO.setImageUrl( subjectCategory.getImageUrl() );
+        subjectCategoryBO.setParentId( subjectCategory.getParentId() );
+        subjectCategoryBO.setIsDeleted( subjectCategory.getIsDeleted() );
+
+        return subjectCategoryBO;
     }
 }
