@@ -14,6 +14,7 @@ import javax.annotation.Resource;
  * @Description:
  */
 @RestController
+
 public class SubjectController {
     @Resource
     private SubjectCategoryService subjectCategoryService;

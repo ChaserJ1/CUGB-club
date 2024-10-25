@@ -1,7 +1,6 @@
 package edu.cugb.subject.domain.service;
 
 import edu.cugb.subject.domain.entity.SubjectCategoryBO;
-import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 
 import java.util.List;
 
@@ -12,6 +11,11 @@ import java.util.List;
  */
 public interface SubjectCategoryDomainService {
 
+    /**
+     * 新增分类
+     *
+     * @param subjectCategoryBO
+     */
     void add(SubjectCategoryBO subjectCategoryBO);
 
     /**
@@ -21,4 +25,20 @@ public interface SubjectCategoryDomainService {
      * @return
      */
     List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 更新分类
+     *
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean update(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 删除分类
+     *
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean delete(SubjectCategoryBO subjectCategoryBO);
 }

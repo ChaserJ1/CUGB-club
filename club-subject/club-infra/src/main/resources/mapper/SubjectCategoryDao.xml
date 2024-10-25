@@ -235,5 +235,11 @@
         where id = #{id}
     </delete>
 
+    <delete id="delete">
+        UPDATE subject_category
+        set is_deleted = 1
+        where id = #{id}
+    </delete>
+
 </mapper>
 

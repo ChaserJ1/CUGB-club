@@ -30,6 +30,13 @@ public class SubjectCategoryController {
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
+
+    /**
+     * 新增分类
+     *
+     * @param subjectCategoryDTO
+     * @return
+     */
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
@@ -45,14 +52,19 @@ public class SubjectCategoryController {
             return Result.ok(true);
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
-            return Result.fail(e.getMessage());
+            return Result.fail("新增分类失败");
         }
     }
 
+    /**
+     * 查询大类
+     *
+     * @return
+     */
     @PostMapping("/queryPrimaryCategory")
-    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory() {
+    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO ) {
         try {
-            SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBO(subjectCategoryDTO);
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE
                     .convertBOToDTOList(subjectCategoryBOList);
@@ -64,8 +76,14 @@ public class SubjectCategoryController {
 
     }
 
+    /**
+     * 查询大类下分类
+     *
+     * @param subjectCategoryDTO
+     * @return
+     */
     @PostMapping("/queryCategoryByPrimary")
-    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+    public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.queryCategoryByPrimary.dto:{}", JSON.toJSONString(subjectCategoryDTO));
@@ -82,6 +100,52 @@ public class SubjectCategoryController {
             return Result.fail("查询失败");
         }
 
+    }
+
+    /**
+     * 更新分类
+     *
+     * @param subjectCategoryDTO
+     * @return
+     */
+    @PostMapping("/update")
+    public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.update.dto:{}", JSON.toJSONString(subjectCategoryDTO));
+            }
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBO(subjectCategoryDTO);
+            Boolean result = subjectCategoryDomainService.update(subjectCategoryBO);
+            return Result.ok(result);
+
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.update.error:{}", e.getMessage(), e);
+            return Result.fail("更新分类失败");
+        }
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param subjectCategoryDTO
+     * @return
+     */
+    @PostMapping("/delete")
+    public Result<Boolean> delete(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.delete.dto:{}", JSON.toJSONString(subjectCategoryDTO));
+            }
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBO(subjectCategoryDTO);
+            Boolean result = subjectCategoryDomainService.delete(subjectCategoryBO);
+            return Result.ok(result);
+
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.update.error:{}", e.getMessage(), e);
+            return Result.fail("删除分类失败");
+        }
     }
 
 
