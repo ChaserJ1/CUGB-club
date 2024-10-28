@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/club-application.iml" filepath="$PROJECT_DIR$/club-application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-application-controller.iml" filepath="$PROJECT_DIR$/club-application-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-application-job.iml" filepath="$PROJECT_DIR$/club-application-job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-application-mq.iml" filepath="$PROJECT_DIR$/club-application-mq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-common.iml" filepath="$PROJECT_DIR$/club-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-domain.iml" filepath="$PROJECT_DIR$/club-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-infra.iml" filepath="$PROJECT_DIR$/club-infra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-starter.iml" filepath="$PROJECT_DIR$/club-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-subject.iml" filepath="$PROJECT_DIR$/club-subject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/club-subject-api.iml" filepath="$PROJECT_DIR$/club-subject-api.iml" />
+    </modules>
+  </component>
+</project>
