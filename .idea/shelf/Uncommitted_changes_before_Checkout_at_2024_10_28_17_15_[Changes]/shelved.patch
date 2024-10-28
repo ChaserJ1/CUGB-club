@@ -1,0 +1,905 @@
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectController.java
+rename from club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java
+rename to club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectController.java
+--- a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectController.java	
+@@ -1,12 +1,27 @@
+-package edu.cugb.subject.application.controller;
++package edu.cugb.subject.infra.basic.mapper.controller;
+ 
++import com.alibaba.fastjson.JSON;
++import com.baomidou.mybatisplus.core.toolkit.StringUtils;
++import com.google.common.base.Preconditions;
++import edu.cugb.subject.application.convert.SubjectAnswerDTOConverter;
++import edu.cugb.subject.application.convert.SubjectCategoryDTOConverter;
++import edu.cugb.subject.application.convert.SubjectInfoDTOConverter;
++import edu.cugb.subject.application.dto.SubjectCategoryDTO;
++import edu.cugb.subject.application.dto.SubjectInfoDTO;
++import edu.cugb.subject.common.entity.Result;
++import edu.cugb.subject.domain.entity.SubjectAnswerBO;
++import edu.cugb.subject.domain.entity.SubjectCategoryBO;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.domain.service.SubjectInfoDomainService;
+ import edu.cugb.subject.infra.basic.entity.SubjectCategory;
+ import edu.cugb.subject.infra.basic.service.SubjectCategoryService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.RestController;
++import edu.cugb.subject.infra.basic.service.SubjectInfoService;
++import lombok.extern.slf4j.Slf4j;
++import org.springframework.util.CollectionUtils;
++import org.springframework.web.bind.annotation.*;
+ 
+ import javax.annotation.Resource;
++import java.util.List;
+ 
+ /**
+  * @Author pengjia
+@@ -14,14 +29,42 @@
+  * @Description:
+  */
+ @RestController
+-
++@RequestMapping("/subject")
++@Slf4j
+ public class SubjectController {
+     @Resource
+-    private SubjectCategoryService subjectCategoryService;
++    private SubjectInfoDomainService subjectInfoDomainService;
++
++    @PostMapping("/add")
++    public Result<Boolean> add(@RequestBody SubjectInfoDTO subjectInfoDTO) {
++        try {
++            //输出日志
++            if (log.isInfoEnabled()) {
++                log.info("SubjectController.add.dto:{}", JSON.toJSONString(subjectInfoDTO));
++            }
++            //校验
++            Preconditions.checkArgument(!StringUtils.isBlank(subjectInfoDTO.getSubjectName()),
++                    "题目名称不能为空");
++            Preconditions.checkNotNull(subjectInfoDTO.getSubjectDifficult(),
++                    "难度不能为空");
++            Preconditions.checkNotNull(subjectInfoDTO.getSubjectType(),
++                    "题目类型不能为空");
++            Preconditions.checkNotNull(subjectInfoDTO.getSubjectScore(),
++                    "题目分数不能为空");
++            Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoDTO.getCategoryIds()),
++                    "分类id不能为空");
++            Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoDTO.getLabelIds()),
++                    "标签id不能为空");
+ 
+-    @GetMapping(("/test"))
+-    public String test() {
+-        SubjectCategory subjectCategory = subjectCategoryService.queryById(1L);
+-        return subjectCategory.getCategoryName();
++            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertDTOToBO(subjectInfoDTO);
++            List<SubjectAnswerBO> subjectAnswerBOS = SubjectAnswerDTOConverter.INSTANCE.convertDTOListToBOList(subjectInfoDTO.getOptionList());
++            subjectInfoBO.setOptionList(subjectAnswerBOS);
++            subjectInfoDomainService.add(subjectInfoBO);
++            return Result.ok(true);
++        } catch (Exception e) {
++            log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
++            return Result.fail("新增题目失败");
++        }
+     }
++
+ }
+Index: club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cugb.subject.domain.convert;\r\n\r\nimport edu.cugb.subject.domain.entity.SubjectLabelBO;\r\nimport edu.cugb.subject.infra.basic.entity.SubjectLabel;\r\nimport javax.annotation.Generated;\r\n\r\n@Generated(\r\n    value = \"org.mapstruct.ap.MappingProcessor\",\r\n    date = \"2024-10-25T14:39:26+0800\",\r\n    comments = \"version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_152 (Oracle Corporation)\"\r\n)\r\npublic class SubjectLabelConverterImpl implements SubjectLabelConverter {\r\n\r\n    @Override\r\n    public SubjectLabel convertBOToLabel(SubjectLabelBO subjectLabelBO) {\r\n        if ( subjectLabelBO == null ) {\r\n            return null;\r\n        }\r\n\r\n        SubjectLabel subjectLabel = new SubjectLabel();\r\n\r\n        subjectLabel.setId( subjectLabelBO.getId() );\r\n        subjectLabel.setLabelName( subjectLabelBO.getLabelName() );\r\n        subjectLabel.setSortNum( subjectLabelBO.getSortNum() );\r\n        if ( subjectLabelBO.getCategoryId() != null ) {\r\n            subjectLabel.setCategoryId( String.valueOf( subjectLabelBO.getCategoryId() ) );\r\n        }\r\n\r\n        return subjectLabel;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java b/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java
+--- a/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java	
++++ b/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java	
+@@ -6,7 +6,7 @@
+ 
+ @Generated(
+     value = "org.mapstruct.ap.MappingProcessor",
+-    date = "2024-10-25T14:39:26+0800",
++    date = "2024-10-27T19:37:38+0800",
+     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_152 (Oracle Corporation)"
+ )
+ public class SubjectLabelConverterImpl implements SubjectLabelConverter {
+Index: club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cugb.subject.application.convert;\r\n\r\nimport edu.cugb.subject.application.dto.SubjectLabelDTO;\r\nimport edu.cugb.subject.domain.entity.SubjectLabelBO;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport javax.annotation.Generated;\r\n\r\n@Generated(\r\n    value = \"org.mapstruct.ap.MappingProcessor\",\r\n    date = \"2024-10-25T14:39:31+0800\",\r\n    comments = \"version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_152 (Oracle Corporation)\"\r\n)\r\npublic class SubjectLabelDTOConverterImpl implements SubjectLabelDTOConverter {\r\n\r\n    @Override\r\n    public SubjectLabelBO convertDTOToBO(SubjectLabelDTO subjectLabelDTO) {\r\n        if ( subjectLabelDTO == null ) {\r\n            return null;\r\n        }\r\n\r\n        SubjectLabelBO subjectLabelBO = new SubjectLabelBO();\r\n\r\n        subjectLabelBO.setId( subjectLabelDTO.getId() );\r\n        subjectLabelBO.setCategoryId( subjectLabelDTO.getCategoryId() );\r\n        subjectLabelBO.setLabelName( subjectLabelDTO.getLabelName() );\r\n        subjectLabelBO.setSortNum( subjectLabelDTO.getSortNum() );\r\n\r\n        return subjectLabelBO;\r\n    }\r\n\r\n    @Override\r\n    public List<SubjectLabelDTO> convertBOLIstToDTOList(List<SubjectLabelBO> subjectLabelBOList) {\r\n        if ( subjectLabelBOList == null ) {\r\n            return null;\r\n        }\r\n\r\n        List<SubjectLabelDTO> list = new ArrayList<SubjectLabelDTO>( subjectLabelBOList.size() );\r\n        for ( SubjectLabelBO subjectLabelBO : subjectLabelBOList ) {\r\n            list.add( subjectLabelBOToSubjectLabelDTO( subjectLabelBO ) );\r\n        }\r\n\r\n        return list;\r\n    }\r\n\r\n    protected SubjectLabelDTO subjectLabelBOToSubjectLabelDTO(SubjectLabelBO subjectLabelBO) {\r\n        if ( subjectLabelBO == null ) {\r\n            return null;\r\n        }\r\n\r\n        SubjectLabelDTO subjectLabelDTO = new SubjectLabelDTO();\r\n\r\n        subjectLabelDTO.setId( subjectLabelBO.getId() );\r\n        subjectLabelDTO.setCategoryId( subjectLabelBO.getCategoryId() );\r\n        subjectLabelDTO.setLabelName( subjectLabelBO.getLabelName() );\r\n        subjectLabelDTO.setSortNum( subjectLabelBO.getSortNum() );\r\n\r\n        return subjectLabelDTO;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java b/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java
+--- a/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java	
++++ b/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java	
+@@ -8,7 +8,7 @@
+ 
+ @Generated(
+     value = "org.mapstruct.ap.MappingProcessor",
+-    date = "2024-10-25T14:39:31+0800",
++    date = "2024-10-27T19:37:42+0800",
+     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_152 (Oracle Corporation)"
+ )
+ public class SubjectLabelDTOConverterImpl implements SubjectLabelDTOConverter {
+Index: club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\r\n<mapper namespace=\"edu.cugb.subject.infra.basic.mapper.SubjectMappingDao\">\r\n\r\n    <resultMap type=\"edu.cugb.subject.infra.basic.entity.SubjectMapping\" id=\"SubjectMappingMap\">\r\n        <result property=\"id\" column=\"id\" jdbcType=\"INTEGER\"/>\r\n        <result property=\"subjectId\" column=\"subject_id\" jdbcType=\"INTEGER\"/>\r\n        <result property=\"categoryId\" column=\"category_id\" jdbcType=\"INTEGER\"/>\r\n        <result property=\"labelId\" column=\"label_id\" jdbcType=\"INTEGER\"/>\r\n        <result property=\"createdBy\" column=\"created_by\" jdbcType=\"VARCHAR\"/>\r\n        <result property=\"createdTime\" column=\"created_time\" jdbcType=\"TIMESTAMP\"/>\r\n        <result property=\"updateBy\" column=\"update_by\" jdbcType=\"VARCHAR\"/>\r\n        <result property=\"updateTime\" column=\"update_time\" jdbcType=\"TIMESTAMP\"/>\r\n        <result property=\"isDeleted\" column=\"is_deleted\" jdbcType=\"INTEGER\"/>\r\n    </resultMap>\r\n\r\n    <!--查询单个-->\r\n    <select id=\"queryById\" resultMap=\"SubjectMappingMap\">\r\n        select id,\r\n               subject_id,\r\n               category_id,\r\n               label_id,\r\n               created_by,\r\n               created_time,\r\n               update_by,\r\n               update_time,\r\n               is_deleted\r\n        from subject_mapping\r\n        where id = #{id}\r\n    </select>\r\n\r\n    <!--查询指定行数据-->\r\n    <select id=\"queryAllByLimit\" resultMap=\"SubjectMappingMap\">\r\n        select\r\n        id,\r\n        subject_id,\r\n        category_id,\r\n        label_id,\r\n        created_by,\r\n        created_time,\r\n        update_by,\r\n        update_time,\r\n        is_deleted\r\n        from subject_mapping\r\n        <where>\r\n            <if test=\"id != null\">\r\n                and id = #{id}\r\n            </if>\r\n            <if test=\"subjectId != null\">\r\n                and subject_id = #{subjectId}\r\n            </if>\r\n            <if test=\"categoryId != null\">\r\n                and category_id = #{categoryId}\r\n            </if>\r\n            <if test=\"labelId != null\">\r\n                and label_id = #{labelId}\r\n            </if>\r\n            <if test=\"createdBy != null and createdBy != ''\">\r\n                and created_by = #{createdBy}\r\n            </if>\r\n            <if test=\"createdTime != null\">\r\n                and created_time = #{createdTime}\r\n            </if>\r\n            <if test=\"updateBy != null and updateBy != ''\">\r\n                and update_by = #{updateBy}\r\n            </if>\r\n            <if test=\"updateTime != null\">\r\n                and update_time = #{updateTime}\r\n            </if>\r\n            <if test=\"isDeleted != null\">\r\n                and is_deleted = #{isDeleted}\r\n            </if>\r\n        </where>\r\n        limit #{pageable.offset}, #{pageable.pageSize}\r\n    </select>\r\n\r\n    <!--统计总行数-->\r\n    <select id=\"count\" resultType=\"java.lang.Long\">\r\n        select count(1)\r\n        from subject_mapping\r\n        <where>\r\n            <if test=\"id != null\">\r\n                and id = #{id}\r\n            </if>\r\n            <if test=\"subjectId != null\">\r\n                and subject_id = #{subjectId}\r\n            </if>\r\n            <if test=\"categoryId != null\">\r\n                and category_id = #{categoryId}\r\n            </if>\r\n            <if test=\"labelId != null\">\r\n                and label_id = #{labelId}\r\n            </if>\r\n            <if test=\"createdBy != null and createdBy != ''\">\r\n                and created_by = #{createdBy}\r\n            </if>\r\n            <if test=\"createdTime != null\">\r\n                and created_time = #{createdTime}\r\n            </if>\r\n            <if test=\"updateBy != null and updateBy != ''\">\r\n                and update_by = #{updateBy}\r\n            </if>\r\n            <if test=\"updateTime != null\">\r\n                and update_time = #{updateTime}\r\n            </if>\r\n            <if test=\"isDeleted != null\">\r\n                and is_deleted = #{isDeleted}\r\n            </if>\r\n        </where>\r\n    </select>\r\n    <select id=\"queryDistinctLabelId\" resultMap=\"SubjectMappingMap\">\r\n        select\r\n        distinct label_id\r\n        from subject_mapping\r\n        <where>\r\n            <if test=\"id != null\">\r\n                and id = #{id}\r\n            </if>\r\n            <if test=\"subjectId != null\">\r\n                and subject_id = #{subjectId}\r\n            </if>\r\n            <if test=\"categoryId != null\">\r\n                and category_id = #{categoryId}\r\n            </if>\r\n            <if test=\"labelId != null\">\r\n                and label_id = #{labelId}\r\n            </if>\r\n            <if test=\"createdBy != null and createdBy != ''\">\r\n                and created_by = #{createdBy}\r\n            </if>\r\n            <if test=\"createdTime != null\">\r\n                and created_time = #{createdTime}\r\n            </if>\r\n            <if test=\"updateBy != null and updateBy != ''\">\r\n                and update_by = #{updateBy}\r\n            </if>\r\n            <if test=\"updateTime != null\">\r\n                and update_time = #{updateTime}\r\n            </if>\r\n            <if test=\"isDeleted != null\">\r\n                and is_deleted = #{isDeleted}\r\n            </if>\r\n        </where>\r\n\r\n    </select>\r\n\r\n    <!--新增所有列-->\r\n    <insert id=\"insert\" keyProperty=\"id\" useGeneratedKeys=\"true\">\r\n        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)\r\n        values (#{subjectId},#{categoryId},#{labelId},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})\r\n    </insert>\r\n\r\n    <insert id=\"insertBatch\" keyProperty=\"id\" useGeneratedKeys=\"true\">\r\n        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)\r\n        values\r\n        <foreach collection=\"entities\" item=\"entity\" separator=\",\">\r\n        (#{entity.subjectId},#{entity.categoryId},#{entity.labelId},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})\r\n        </foreach>\r\n    </insert>\r\n\r\n    <insert id=\"insertOrUpdateBatch\" keyProperty=\"id\" useGeneratedKeys=\"true\">\r\n        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)\r\n        values\r\n        <foreach collection=\"entities\" item=\"entity\" separator=\",\">\r\n            (#{entity.subjectId},#{entity.categoryId},#{entity.labelId},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})\r\n        </foreach>\r\n        on duplicate key update\r\nsubject_id = values(subject_id),category_id = values(category_id),label_id = values(label_id),created_by = values(created_by),created_time = values(created_time),update_by = values(update_by),update_time = values(update_time),is_deleted = values(is_deleted)\r\n    </insert>\r\n\r\n    <!--通过主键修改数据-->\r\n    <update id=\"update\">\r\n        update subject_mapping\r\n        <set>\r\n            <if test=\"subjectId != null\">\r\n                subject_id = #{subjectId},\r\n            </if>\r\n            <if test=\"categoryId != null\">\r\n                category_id = #{categoryId},\r\n            </if>\r\n            <if test=\"labelId != null\">\r\n                label_id = #{labelId},\r\n            </if>\r\n            <if test=\"createdBy != null and createdBy != ''\">\r\n                created_by = #{createdBy},\r\n            </if>\r\n            <if test=\"createdTime != null\">\r\n                created_time = #{createdTime},\r\n            </if>\r\n            <if test=\"updateBy != null and updateBy != ''\">\r\n                update_by = #{updateBy},\r\n            </if>\r\n            <if test=\"updateTime != null\">\r\n                update_time = #{updateTime},\r\n            </if>\r\n            <if test=\"isDeleted != null\">\r\n                is_deleted = #{isDeleted},\r\n            </if>\r\n        </set>\r\n        where id = #{id}\r\n    </update>\r\n\r\n    <!--通过主键删除-->\r\n    <delete id=\"deleteById\">\r\n        delete from subject_mapping where id = #{id}\r\n    </delete>\r\n\r\n</mapper>\r\n\r\n
+===================================================================
+diff --git a/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml b/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml
+--- a/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml	
++++ b/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml	
+@@ -146,26 +146,32 @@
+ 
+     <!--新增所有列-->
+     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+-        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)
+-        values (#{subjectId},#{categoryId},#{labelId},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
++        insert into subject_mapping(subject_id, category_id, label_id, created_by, created_time, update_by, update_time,
++                                    is_deleted)
++        values (#{subjectId}, #{categoryId}, #{labelId}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime},
++                #{isDeleted})
+     </insert>
+ 
+     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+-        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)
++        insert into
++        subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)
+         values
+         <foreach collection="entities" item="entity" separator=",">
+-        (#{entity.subjectId},#{entity.categoryId},#{entity.labelId},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++            (#{entity.subjectId},#{entity.categoryId},#{entity.labelId},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
+         </foreach>
+     </insert>
+ 
+     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+-        insert into subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)
++        insert into
++        subject_mapping(subject_id,category_id,label_id,created_by,created_time,update_by,update_time,is_deleted)
+         values
+         <foreach collection="entities" item="entity" separator=",">
+             (#{entity.subjectId},#{entity.categoryId},#{entity.labelId},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
+         </foreach>
+         on duplicate key update
+-subject_id = values(subject_id),category_id = values(category_id),label_id = values(label_id),created_by = values(created_by),created_time = values(created_time),update_by = values(update_by),update_time = values(update_time),is_deleted = values(is_deleted)
++        subject_id = values(subject_id),category_id = values(category_id),label_id = values(label_id),created_by =
++        values(created_by),created_time = values(created_time),update_by = values(update_by),update_time =
++        values(update_time),is_deleted = values(is_deleted)
+     </insert>
+ 
+     <!--通过主键修改数据-->
+@@ -202,7 +208,9 @@
+ 
+     <!--通过主键删除-->
+     <delete id="deleteById">
+-        delete from subject_mapping where id = #{id}
++        delete
++        from subject_mapping
++        where id = #{id}
+     </delete>
+ 
+ </mapper>
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cugb.subject.infra.basic.service.impl;\r\n\r\nimport edu.cugb.subject.infra.basic.entity.SubjectMapping;\r\nimport edu.cugb.subject.infra.basic.mapper.SubjectMappingDao;\r\nimport edu.cugb.subject.infra.basic.service.SubjectMappingService;\r\nimport org.springframework.stereotype.Service;\r\n\r\n\r\nimport javax.annotation.Resource;\r\nimport java.util.List;\r\n\r\n/**\r\n * 题目分类关系表(SubjectMapping)表服务实现类\r\n *\r\n * @author makejava\r\n * @since 2024-10-24 20:07:44\r\n */\r\n@Service(\"subjectMappingService\")\r\npublic class SubjectMappingServiceImpl implements SubjectMappingService {\r\n    @Resource\r\n    private SubjectMappingDao subjectMappingDao;\r\n\r\n    /**\r\n     * 通过ID查询单条数据\r\n     *\r\n     * @param id 主键\r\n     * @return 实例对象\r\n     */\r\n    @Override\r\n    public SubjectMapping queryById(Long id) {\r\n        return this.subjectMappingDao.queryById(id);\r\n    }\r\n\r\n\r\n    /**\r\n     * 新增数据\r\n     *\r\n     * @param subjectMapping 实例对象\r\n     * @return 实例对象\r\n     */\r\n    @Override\r\n    public SubjectMapping insert(SubjectMapping subjectMapping) {\r\n        this.subjectMappingDao.insert(subjectMapping);\r\n        return subjectMapping;\r\n    }\r\n\r\n    /**\r\n     * 修改数据\r\n     *\r\n     * @param subjectMapping 实例对象\r\n     * @return 实例对象\r\n     */\r\n    @Override\r\n    public int update(SubjectMapping subjectMapping) {\r\n\r\n        return this.subjectMappingDao.update(subjectMapping);\r\n    }\r\n\r\n    /**\r\n     * 通过主键删除数据\r\n     *\r\n     * @param id 主键\r\n     * @return 是否成功\r\n     */\r\n    @Override\r\n    public boolean deleteById(Long id) {\r\n        return this.subjectMappingDao.deleteById(id) > 0;\r\n    }\r\n\r\n    /**\r\n     * 查询标签id\r\n     *\r\n     * @param subjectMapping\r\n     * @return\r\n     */\r\n    @Override\r\n    public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {\r\n        return this.subjectMappingDao.queryDistinctLabelId(subjectMapping);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java
+--- a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java	
+@@ -77,4 +77,15 @@
+     public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {
+         return this.subjectMappingDao.queryDistinctLabelId(subjectMapping);
+     }
++
++
++    /**
++     * 批量插入SubjectMapping表
++     *
++     * @param mappingList
++     */
++    @Override
++    public void batchInsert(List<SubjectMapping> mappingList) {
++        this.subjectMappingDao.insertBatch(mappingList);
++    }
+ }
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMapping.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cugb.subject.infra.basic.entity;\r\n\r\nimport java.util.Date;\r\nimport java.io.Serializable;\r\n\r\n/**\r\n * 题目分类关系表(SubjectMapping)实体类\r\n *\r\n * @author makejava\r\n * @since 2024-10-24 20:07:44\r\n */\r\npublic class SubjectMapping implements Serializable {\r\n    private static final long serialVersionUID = -53233559033990753L;\r\n    /**\r\n     * 主键\r\n     */\r\n    private Long id;\r\n    /**\r\n     * 题目id\r\n     */\r\n    private Long subjectId;\r\n    /**\r\n     * 分类id\r\n     */\r\n    private Long categoryId;\r\n    /**\r\n     * 标签id\r\n     */\r\n    private Long labelId;\r\n    /**\r\n     * 创建人\r\n     */\r\n    private String createdBy;\r\n    /**\r\n     * 创建时间\r\n     */\r\n    private Date createdTime;\r\n    /**\r\n     * 修改人\r\n     */\r\n    private String updateBy;\r\n    /**\r\n     * 修改时间\r\n     */\r\n    private Date updateTime;\r\n\r\n    private Integer isDeleted;\r\n\r\n\r\n    public Long getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(Long id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public Long getSubjectId() {\r\n        return subjectId;\r\n    }\r\n\r\n    public void setSubjectId(Long subjectId) {\r\n        this.subjectId = subjectId;\r\n    }\r\n\r\n    public Long getCategoryId() {\r\n        return categoryId;\r\n    }\r\n\r\n    public void setCategoryId(Long categoryId) {\r\n        this.categoryId = categoryId;\r\n    }\r\n\r\n    public Long getLabelId() {\r\n        return labelId;\r\n    }\r\n\r\n    public void setLabelId(Long labelId) {\r\n        this.labelId = labelId;\r\n    }\r\n\r\n    public String getCreatedBy() {\r\n        return createdBy;\r\n    }\r\n\r\n    public void setCreatedBy(String createdBy) {\r\n        this.createdBy = createdBy;\r\n    }\r\n\r\n    public Date getCreatedTime() {\r\n        return createdTime;\r\n    }\r\n\r\n    public void setCreatedTime(Date createdTime) {\r\n        this.createdTime = createdTime;\r\n    }\r\n\r\n    public String getUpdateBy() {\r\n        return updateBy;\r\n    }\r\n\r\n    public void setUpdateBy(String updateBy) {\r\n        this.updateBy = updateBy;\r\n    }\r\n\r\n    public Date getUpdateTime() {\r\n        return updateTime;\r\n    }\r\n\r\n    public void setUpdateTime(Date updateTime) {\r\n        this.updateTime = updateTime;\r\n    }\r\n\r\n    public Integer getIsDeleted() {\r\n        return isDeleted;\r\n    }\r\n\r\n    public void setIsDeleted(Integer isDeleted) {\r\n        this.isDeleted = isDeleted;\r\n    }\r\n\r\n}\r\n\r\n
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMapping.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMapping.java
+--- a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMapping.java	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMapping.java	
+@@ -1,5 +1,7 @@
+ package edu.cugb.subject.infra.basic.entity;
+ 
++import lombok.Data;
++
+ import java.util.Date;
+ import java.io.Serializable;
+ 
+@@ -9,6 +11,7 @@
+  * @author makejava
+  * @since 2024-10-24 20:07:44
+  */
++@Data
+ public class SubjectMapping implements Serializable {
+     private static final long serialVersionUID = -53233559033990753L;
+     /**
+@@ -47,77 +50,6 @@
+     private Integer isDeleted;
+ 
+ 
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public void setId(Long id) {
+-        this.id = id;
+-    }
+-
+-    public Long getSubjectId() {
+-        return subjectId;
+-    }
+-
+-    public void setSubjectId(Long subjectId) {
+-        this.subjectId = subjectId;
+-    }
+-
+-    public Long getCategoryId() {
+-        return categoryId;
+-    }
+-
+-    public void setCategoryId(Long categoryId) {
+-        this.categoryId = categoryId;
+-    }
+-
+-    public Long getLabelId() {
+-        return labelId;
+-    }
+-
+-    public void setLabelId(Long labelId) {
+-        this.labelId = labelId;
+-    }
+-
+-    public String getCreatedBy() {
+-        return createdBy;
+-    }
+-
+-    public void setCreatedBy(String createdBy) {
+-        this.createdBy = createdBy;
+-    }
+-
+-    public Date getCreatedTime() {
+-        return createdTime;
+-    }
+-
+-    public void setCreatedTime(Date createdTime) {
+-        this.createdTime = createdTime;
+-    }
+-
+-    public String getUpdateBy() {
+-        return updateBy;
+-    }
+-
+-    public void setUpdateBy(String updateBy) {
+-        this.updateBy = updateBy;
+-    }
+-
+-    public Date getUpdateTime() {
+-        return updateTime;
+-    }
+-
+-    public void setUpdateTime(Date updateTime) {
+-        this.updateTime = updateTime;
+-    }
+-
+-    public Integer getIsDeleted() {
+-        return isDeleted;
+-    }
+-
+-    public void setIsDeleted(Integer isDeleted) {
+-        this.isDeleted = isDeleted;
+-    }
+ 
+ }
+ 
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cugb.subject.infra.basic.service;\r\n\r\nimport edu.cugb.subject.infra.basic.entity.SubjectMapping;\r\n\r\nimport java.util.List;\r\n\r\n\r\n/**\r\n * 题目分类关系表(SubjectMapping)表服务接口\r\n *\r\n * @author makejava\r\n * @since 2024-10-24 20:07:44\r\n */\r\npublic interface SubjectMappingService {\r\n\r\n    /**\r\n     * 通过ID查询单条数据\r\n     *\r\n     * @param id 主键\r\n     * @return 实例对象\r\n     */\r\n    SubjectMapping queryById(Long id);\r\n\r\n\r\n    /**\r\n     * 新增数据\r\n     *\r\n     * @param subjectMapping 实例对象\r\n     * @return 实例对象\r\n     */\r\n    SubjectMapping insert(SubjectMapping subjectMapping);\r\n\r\n    /**\r\n     * 修改数据\r\n     *\r\n     * @param subjectMapping 实例对象\r\n     * @return 实例对象\r\n     */\r\n    int update(SubjectMapping subjectMapping);\r\n\r\n    /**\r\n     * 通过主键删除数据\r\n     *\r\n     * @param id 主键\r\n     * @return 是否成功\r\n     */\r\n    boolean deleteById(Long id);\r\n\r\n    /**\r\n     * 查询标签id\r\n     *\r\n     * @param subjectMapping\r\n     * @return\r\n     */\r\n    List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);\r\n}\r\n
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java
+--- a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java	
+@@ -53,4 +53,10 @@
+      * @return
+      */
+     List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
++
++    /**
++     * 批量插入SubjectMapping表
++     * @param mappingList
++     */
++    void batchInsert(List<SubjectMapping> mappingList);
+ }
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectLabelController.java
+rename from club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java
+rename to club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectLabelController.java
+--- a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectLabelController.java	
+@@ -1,14 +1,11 @@
+-package edu.cugb.subject.application.controller;
++package edu.cugb.subject.infra.basic.mapper.controller;
+ 
+ import com.alibaba.fastjson.JSON;
+ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+ import com.google.common.base.Preconditions;
+-import edu.cugb.subject.application.convert.SubjectCategoryDTOConverter;
+ import edu.cugb.subject.application.convert.SubjectLabelDTOConverter;
+-import edu.cugb.subject.application.dto.SubjectCategoryDTO;
+ import edu.cugb.subject.application.dto.SubjectLabelDTO;
+ import edu.cugb.subject.common.entity.Result;
+-import edu.cugb.subject.domain.entity.SubjectCategoryBO;
+ import edu.cugb.subject.domain.entity.SubjectLabelBO;
+ import edu.cugb.subject.domain.service.SubjectLabelDomainService;
+ import lombok.extern.slf4j.Slf4j;
+Index: .idea/easyCodeTableSetting.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"EasyCodeTableSetting\">\r\n    <option name=\"tableInfoMap\">\r\n      <map>\r\n        <entry key=\"jc-club.subject_category\">\r\n          <value>\r\n            <TableInfoDTO>\r\n              <option name=\"comment\" value=\"题目分类\" />\r\n              <option name=\"fullColumn\">\r\n                <list>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"主键\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"id\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"分类名称\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"categoryName\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"分类类型\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"categoryType\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"图标连接\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"imageUrl\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"父级id\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"parentId\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"更新人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"更新时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"是否删除 0: 未删除 1: 已删除\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"isDeleted\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                </list>\r\n              </option>\r\n              <option name=\"name\" value=\"SubjectCategory\" />\r\n              <option name=\"preName\" value=\"\" />\r\n              <option name=\"saveModelName\" value=\"club-starter\" />\r\n              <option name=\"savePackageName\" value=\"edu.cugb.subject.infra.basic\" />\r\n              <option name=\"savePath\" value=\"./club-subject/club-starter/src/main/java/edu/cugb/subject/infra/basic\" />\r\n              <option name=\"templateGroupName\" value=\"Default\" />\r\n            </TableInfoDTO>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"jc-club.subject_label\">\r\n          <value>\r\n            <TableInfoDTO>\r\n              <option name=\"comment\" value=\"题目标签表\" />\r\n              <option name=\"fullColumn\">\r\n                <list>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"主键\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"id\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"标签分类\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"labelName\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"排序\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"sortNum\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"categoryId\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"更新人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"更新时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"isDeleted\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                </list>\r\n              </option>\r\n              <option name=\"name\" value=\"SubjectLabel\" />\r\n              <option name=\"preName\" value=\"\" />\r\n              <option name=\"saveModelName\" value=\"club-infra\" />\r\n              <option name=\"savePackageName\" value=\"edu.cugb.subject.infra.basic\" />\r\n              <option name=\"savePath\" value=\"./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic\" />\r\n              <option name=\"templateGroupName\" value=\"Default\" />\r\n            </TableInfoDTO>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"jc-club.subject_mapping\">\r\n          <value>\r\n            <TableInfoDTO>\r\n              <option name=\"comment\" value=\"题目分类关系表\" />\r\n              <option name=\"fullColumn\">\r\n                <list>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"主键\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"id\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"题目id\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"subjectId\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"分类id\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"categoryId\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"标签id\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"labelId\" />\r\n                    <option name=\"type\" value=\"java.lang.Long\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"创建时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"createdTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"修改人\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateBy\" />\r\n                    <option name=\"type\" value=\"java.lang.String\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"comment\" value=\"修改时间\" />\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"updateTime\" />\r\n                    <option name=\"type\" value=\"java.util.Date\" />\r\n                  </ColumnInfoDTO>\r\n                  <ColumnInfoDTO>\r\n                    <option name=\"custom\" value=\"false\" />\r\n                    <option name=\"ext\" value=\"{}\" />\r\n                    <option name=\"name\" value=\"isDeleted\" />\r\n                    <option name=\"type\" value=\"java.lang.Integer\" />\r\n                  </ColumnInfoDTO>\r\n                </list>\r\n              </option>\r\n              <option name=\"name\" value=\"SubjectMapping\" />\r\n              <option name=\"preName\" value=\"\" />\r\n              <option name=\"saveModelName\" value=\"club-infra\" />\r\n              <option name=\"savePackageName\" value=\"edu.cugb.subject.infra.basic\" />\r\n              <option name=\"savePath\" value=\"./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic\" />\r\n              <option name=\"templateGroupName\" value=\"Default\" />\r\n            </TableInfoDTO>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/easyCodeTableSetting.xml b/.idea/easyCodeTableSetting.xml
+--- a/.idea/easyCodeTableSetting.xml	
++++ b/.idea/easyCodeTableSetting.xml	
+@@ -3,6 +3,78 @@
+   <component name="EasyCodeTableSetting">
+     <option name="tableInfoMap">
+       <map>
++        <entry key="jc-club.subject_brief">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="简答题" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectId" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目答案" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectAnswer" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectBrief" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
+         <entry key="jc-club.subject_category">
+           <value>
+             <TableInfoDTO>
+@@ -90,6 +162,178 @@
+             </TableInfoDTO>
+           </value>
+         </entry>
++        <entry key="jc-club.subject_info">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="题目信息表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目名称" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectName" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目难度" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectDifficult" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="出题人名" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="settleName" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目类型 1单选 2多选 3判断 4简答" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectType" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目分数" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectScore" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目解析" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectParse" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectInfo" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
++        <entry key="jc-club.subject_judge">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="判断题" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="是否正确" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isCorrect" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectJudge" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
+         <entry key="jc-club.subject_label">
+           <value>
+             <TableInfoDTO>
+@@ -165,6 +409,85 @@
+               <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
+               <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
+               <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
++        <entry key="jc-club.subject_liked">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="题目点赞表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="点赞人id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="likeUserId" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="点赞状态 1点赞 0不点赞" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="status" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectLiked" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="MybatisPlus-Mixed" />
+             </TableInfoDTO>
+           </value>
+         </entry>
+@@ -239,6 +562,178 @@
+                 </list>
+               </option>
+               <option name="name" value="SubjectMapping" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
++        <entry key="jc-club.subject_multiple">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="多选题信息表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="选项类型" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="optionType" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="选项内容" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="optionContent" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="是否正确" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isCorrect" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="更新时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectMultiple" />
++              <option name="preName" value="" />
++              <option name="saveModelName" value="club-infra" />
++              <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
++              <option name="savePath" value="./club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic" />
++              <option name="templateGroupName" value="Default" />
++            </TableInfoDTO>
++          </value>
++        </entry>
++        <entry key="jc-club.subject_radio">
++          <value>
++            <TableInfoDTO>
++              <option name="comment" value="单选题信息表" />
++              <option name="fullColumn">
++                <list>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="主键" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="id" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="题目id" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="subjectId" />
++                    <option name="type" value="java.lang.Long" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="a,b,c,d" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="optionType" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="选项内容" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="optionContent" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="是否正确" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isCorrect" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="创建时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="createdTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改人" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateBy" />
++                    <option name="type" value="java.lang.String" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="comment" value="修改时间" />
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="updateTime" />
++                    <option name="type" value="java.util.Date" />
++                  </ColumnInfoDTO>
++                  <ColumnInfoDTO>
++                    <option name="custom" value="false" />
++                    <option name="ext" value="{}" />
++                    <option name="name" value="isDeleted" />
++                    <option name="type" value="java.lang.Integer" />
++                  </ColumnInfoDTO>
++                </list>
++              </option>
++              <option name="name" value="SubjectRadio" />
+               <option name="preName" value="" />
+               <option name="saveModelName" value="club-infra" />
+               <option name="savePackageName" value="edu.cugb.subject.infra.basic" />
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectCategoryController.java
+rename from club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java
+rename to club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectCategoryController.java
+--- a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/infra/basic/mapper/controller/SubjectCategoryController.java	
+@@ -1,17 +1,14 @@
+-package edu.cugb.subject.application.controller;
++package edu.cugb.subject.infra.basic.mapper.controller;
+ 
+ import com.alibaba.fastjson.JSON;
+ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+-import com.baomidou.mybatisplus.extension.api.R;
+ import com.google.common.base.Preconditions;
+ import edu.cugb.subject.application.convert.SubjectCategoryDTOConverter;
+ import edu.cugb.subject.application.dto.SubjectCategoryDTO;
+ import edu.cugb.subject.common.entity.Result;
+ import edu.cugb.subject.domain.entity.SubjectCategoryBO;
+ import edu.cugb.subject.domain.service.SubjectCategoryDomainService;
+-import edu.cugb.subject.infra.basic.entity.SubjectCategory;
+ import lombok.extern.slf4j.Slf4j;
+-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.web.bind.annotation.*;
+ import org.springframework.web.bind.annotation.RestController;
+ 

@@ -1,0 +1,3544 @@
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java	
+@@ -0,0 +1,65 @@
++package edu.cugb.subject.application.dto;
++
++import lombok.Data;
++
++import java.io.Serializable;
++import java.util.Date;
++import java.util.List;
++
++/**
++ * 题目DTO
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Data
++public class SubjectInfoDTO implements Serializable {
++    private static final long serialVersionUID = -71684389794293822L;
++    /**
++     * 主键
++     */
++    private Long id;
++    /**
++     * 题目名称
++     */
++    private String subjectName;
++    /**
++     * 题目难度
++     */
++    private Integer subjectDifficult;
++    /**
++     * 出题人名
++     */
++    private String settleName;
++    /**
++     * 题目类型 1单选 2多选 3判断 4简答
++     */
++    private Integer subjectType;
++    /**
++     * 题目分数
++     */
++    private Integer subjectScore;
++    /**
++     * 题目解析
++     */
++    private String subjectParse;
++    /**
++     * 题目答案
++     */
++    private String subjectAnswer;
++    /**
++     * 分类id
++     */
++    private List<Integer> categoryIds;
++    /**
++     * 标签id
++     */
++    private List<Integer> labelIds;
++    /**
++     * 答案选项
++     */
++    private List<SubjectAnswerDTO> optionList;
++
++
++}
++
+Index: club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageInfo.java b/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageInfo.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageInfo.java	
+@@ -0,0 +1,25 @@
++package edu.cugb.subject.common.entity;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/28 15:31
++ * @Description: 分页请求实体
++ */
++public class PageInfo {
++
++    private Integer pageNo = 1;
++
++    private Integer pageSize = 20;
++
++    public Integer getPageNo() {
++        if (pageNo == null || pageNo < 1) {
++            return 1;
++        }
++        return pageNo;
++    }
++
++    public Integer getPageSize() {
++        if (pageSize == null || pageSize < 1 || pageSize > Integer.MAX_VALUE) return 20;
++        return pageSize;
++    }
++}
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectAnswerDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectAnswerDTO.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectAnswerDTO.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectAnswerDTO.java	
+@@ -0,0 +1,36 @@
++package edu.cugb.subject.application.dto;
++
++import lombok.Data;
++
++import java.io.Serializable;
++import java.util.List;
++
++/**
++ * 题目答案DTO
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Data
++public class SubjectAnswerDTO implements Serializable {
++    private static final long serialVersionUID = -71684389794293822L;
++
++    /**
++     * 答案选项标识
++     */
++    private Long optionType;
++
++    /**
++     * 选项内容
++     */
++    private String optionContent;
++
++    /**
++     * 是否正确
++     */
++    private int isCorrect;
++
++
++
++}
++
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java	
+@@ -0,0 +1,65 @@
++
++package edu.cugb.subject.domain.entity;
++
++import lombok.Data;
++
++import java.io.Serializable;
++import java.util.List;
++
++/**
++ * 题目DTO
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Data
++public class SubjectInfoBO implements Serializable {
++    private static final long serialVersionUID = -71684389794293822L;
++    /**
++     * 主键
++     */
++    private Long id;
++    /**
++     * 题目名称
++     */
++    private String subjectName;
++    /**
++     * 题目难度
++     */
++    private Integer subjectDifficult;
++    /**
++     * 出题人名
++     */
++    private String settleName;
++    /**
++     * 题目类型 1单选 2多选 3判断 4简答
++     */
++    private Integer subjectType;
++    /**
++     * 题目分数
++     */
++    private Integer subjectScore;
++    /**
++     * 题目解析
++     */
++    private String subjectParse;
++    /**
++     * 题目答案
++     */
++    private String subjectAnswer;
++    /**
++     * 分类id
++     */
++    private List<Integer> categoryIds;
++    /**
++     * 标签id
++     */
++    private List<Integer> labelIds;
++    /**
++     * 答案选项
++     */
++    private List<SubjectAnswerBO> optionList;
++
++
++}
++
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectAnswerBO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectAnswerBO.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectAnswerBO.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectAnswerBO.java	
+@@ -0,0 +1,37 @@
++package edu.cugb.subject.domain.entity;
++
++import lombok.Data;
++
++import java.io.Serializable;
++
++/**
++ * 题目答案DTO
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Data
++public class SubjectAnswerBO implements Serializable {
++    private static final long serialVersionUID = -71684389794293822L;
++
++    /**
++     * 答案选项标识
++     */
++    private Long optionType;
++
++    /**
++     * 选项内容
++     */
++    private String optionContent;
++
++    /**
++     * 是否正确
++     */
++    private int isCorrect;
++
++    private Integer isDeleted;
++
++
++
++}
++
+Index: club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java b/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java	
+@@ -0,0 +1,86 @@
++package edu.cugb.subject.common.entity;
++
++import java.net.Inet4Address;
++import java.util.Collections;
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/28 16:21
++ * @Description: 分页返回的实体
++ */
++public class PageResult<T> {
++    /**
++     * 当前页
++     */
++    private Integer pageNo = 1;
++
++    /**
++     * 页面大小
++     */
++    private Integer pageSize = 20;
++
++    /**
++     * 总记录数
++     */
++    private Integer total = 0;
++
++    /**
++     * 总页数
++     */
++    private Integer totalPages = 0;
++
++    /**
++     * 回传的所有结果
++     */
++    private List<T> result = Collections.emptyList();
++
++    /**
++     * 当前页起始记录
++     */
++    private int start = 1;
++
++    /**
++     * 当前页结束记录
++     */
++    private int end = 0;
++
++    /**
++     * 设置当前记录
++     *
++     * @param result
++     */
++    public void setRecords(List<T> result) {
++        this.result = result;
++        if (result != null && !result.isEmpty()) {
++            setTotal(result.size());
++        }
++    }
++
++    /**
++     * 设置总记录数以及总页数、起始页、结束页
++     *
++     * @param total
++     */
++    public void setTotal(Integer total) {
++        this.total = total;
++        if (this.pageSize > 0) {
++            this.totalPages = (total / this.pageSize) + (total % this.pageSize == 0 ? 0 : 1);
++        } else {
++            this.totalPages = 0;
++        }
++
++        this.start = (this.pageSize > 0 ? (this.pageNo - 1) * this.pageSize : 0) + 1;
++        this.end = (this.start - 1 + this.pageSize * (this.pageNo > 0 ? 1 : 0));
++    }
++
++    private void setPageSize(Integer pageSize){
++        this.pageSize = pageSize;
++    }
++
++    private void setPageNo(Integer pageNo){
++        this.pageNo = pageNo;
++    }
++
++
++}
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java	
+@@ -0,0 +1,20 @@
++package edu.cugb.subject.application.convert;
++
++import edu.cugb.subject.application.dto.SubjectInfoDTO;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import org.mapstruct.Mapper;
++import org.mapstruct.factory.Mappers;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 15:19
++ * @Description: 标签DTO转换
++ */
++@Mapper
++public interface SubjectInfoDTOConverter {
++    SubjectInfoDTOConverter INSTANCE = Mappers.getMapper(SubjectInfoDTOConverter.class);
++
++    SubjectInfoBO convertDTOToBO(SubjectInfoDTO subjectInfoDTO);
++
++
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java	
+@@ -0,0 +1,22 @@
++package edu.cugb.subject.domain.convert;
++
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.domain.entity.SubjectLabelBO;
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++import edu.cugb.subject.infra.basic.entity.SubjectLabel;
++import org.mapstruct.Mapper;
++import org.mapstruct.factory.Mappers;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 15:19
++ * @Description:
++ */
++@Mapper
++public interface SubjectInfoConverter {
++    SubjectInfoConverter INSTANCE = Mappers.getMapper(SubjectInfoConverter.class);
++
++    SubjectInfo convertBOToInfo(SubjectInfoBO subjectInfoBO);
++
++
++}
+Index: club-subject/club-common/src/main/java/edu/cugb/subject/common/enums/SubjectInfoTypeEnum.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-common/src/main/java/edu/cugb/subject/common/enums/SubjectInfoTypeEnum.java b/club-subject/club-common/src/main/java/edu/cugb/subject/common/enums/SubjectInfoTypeEnum.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-common/src/main/java/edu/cugb/subject/common/enums/SubjectInfoTypeEnum.java	
+@@ -0,0 +1,36 @@
++package edu.cugb.subject.common.enums;
++
++import lombok.Getter;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/23 17:20
++ * @Description: 题目类型枚举
++ */
++@Getter
++public enum SubjectInfoTypeEnum {
++
++    RADIO(1, "单选"),
++    MULTIPLE(2, "多选"),
++    JUDGE(3,"判断"),
++    BRIEF(4,"简答");
++
++    public int code;
++
++    public String desc;
++
++
++    SubjectInfoTypeEnum(int code, String desc) {
++        this.code = code;
++        this.desc = desc;
++    }
++
++    public static SubjectInfoTypeEnum getByCode(int codeval) {
++        for (SubjectInfoTypeEnum subjectInfoTypeEnum : SubjectInfoTypeEnum.values()) {
++            if (subjectInfoTypeEnum.code == codeval) {
++                return subjectInfoTypeEnum;
++            }
++        }
++        return null;
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java	
+@@ -0,0 +1,27 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++import org.springframework.stereotype.Component;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 19:42
++ * @Description:
++ */
++
++public interface SubjectTypeHandler {
++    /**
++     * 题目类型识别
++     * @return
++     */
++    SubjectInfoTypeEnum getHandlerType();
++
++
++    /**
++     * 实际的题目的插入
++     * @param subjectInfoBO
++     */
++    void add(SubjectInfoBO subjectInfoBO);
++}
+Index: club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java	
+@@ -0,0 +1,26 @@
++package edu.cugb.subject.application.convert;
++
++import edu.cugb.subject.application.dto.SubjectAnswerDTO;
++import edu.cugb.subject.application.dto.SubjectInfoDTO;
++import edu.cugb.subject.domain.entity.SubjectAnswerBO;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import org.mapstruct.Mapper;
++import org.mapstruct.factory.Mappers;
++
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 15:19
++ * @Description: 标签DTO转换
++ */
++@Mapper
++public interface SubjectAnswerDTOConverter {
++    SubjectAnswerDTOConverter INSTANCE = Mappers.getMapper(SubjectAnswerDTOConverter.class);
++
++    SubjectAnswerBO convertDTOToBO(SubjectAnswerDTO subjectAnswerDTO);
++
++    List<SubjectAnswerBO> convertDTOListToBOList(List<SubjectAnswerDTO> dtoList);
++
++
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.domain.service.impl;
++
++import com.alibaba.fastjson.JSON;
++import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
++import edu.cugb.subject.domain.convert.SubjectInfoConverter;
++import edu.cugb.subject.domain.convert.SubjectLabelConverter;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.domain.entity.SubjectLabelBO;
++import edu.cugb.subject.domain.handler.subject.SubjectHandlerFactory;
++import edu.cugb.subject.domain.handler.subject.SubjectTypeHandler;
++import edu.cugb.subject.domain.service.SubjectInfoDomainService;
++import edu.cugb.subject.domain.service.SubjectLabelDomainService;
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++import edu.cugb.subject.infra.basic.entity.SubjectLabel;
++import edu.cugb.subject.infra.basic.entity.SubjectMapping;
++import edu.cugb.subject.infra.basic.service.SubjectInfoService;
++import edu.cugb.subject.infra.basic.service.SubjectLabelService;
++import edu.cugb.subject.infra.basic.service.SubjectMappingService;
++import lombok.extern.slf4j.Slf4j;
++import org.springframework.stereotype.Service;
++import org.springframework.util.CollectionUtils;
++
++import javax.annotation.Resource;
++import java.util.ArrayList;
++import java.util.Collections;
++import java.util.LinkedList;
++import java.util.List;
++import java.util.stream.Collectors;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 14:39
++ * @Description:wwww
++ */
++@Service
++@Slf4j
++public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
++    @Resource
++    private SubjectInfoService subjectInfoService;
++    @Resource
++    private SubjectHandlerFactory subjectHandlerFactory;
++    @Resource
++    private SubjectMappingService  subjectMappingService;
++
++
++    /**
++     * 新增分类
++     *
++     * @param subjectInfoBO
++     */
++    @Override
++    public void add(SubjectInfoBO subjectInfoBO) {
++        if (log.isInfoEnabled()) {
++            log.info("SubjectInfoController.add.bo:{}", JSON.toJSONString(subjectInfoBO));
++        }
++        //采取工厂+策略的模式来新增分类，工厂包含四种类型，根据传入的type自动映射选择处理  主表info+各自类型的题目
++        //主表信息插入
++        SubjectInfo subjectInfo = SubjectInfoConverter.INSTANCE.convertBOToInfo(subjectInfoBO);
++        subjectInfo.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
++        subjectInfoService.insert(subjectInfo);
++
++        //类型特有信息插入
++        SubjectTypeHandler handler = subjectHandlerFactory.getHandler(subjectInfo.getSubjectType());
++        handler.add(subjectInfoBO);
++
++        //mapping表的信息插入(题目id、分类id、标签id的映射关系)
++        List<Integer> categoryIds = subjectInfoBO.getCategoryIds();
++        List<Integer> labelIds = subjectInfoBO.getLabelIds();
++        List<SubjectMapping> mappingList = new LinkedList<>();
++        categoryIds.forEach(categoryId->{
++            labelIds.forEach(labelId->{
++                SubjectMapping subjectMapping = new SubjectMapping();
++                subjectMapping.setSubjectId(subjectInfoBO.getId());
++                subjectMapping.setCategoryId(Long.valueOf(categoryId));
++                subjectMapping.setLabelId(Long.valueOf(labelId));
++                mappingList.add(subjectMapping);
++            });
++        });
++        subjectMappingService.batchInsert(mappingList);
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java	
+@@ -0,0 +1,23 @@
++package edu.cugb.subject.domain.service;
++
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.domain.entity.SubjectLabelBO;
++
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 12:43
++ * @Description:
++ */
++public interface SubjectInfoDomainService {
++
++    /**
++     * 新增题目
++     *
++     * @param subjectInfoBO
++     */
++    void add(SubjectInfoBO subjectInfoBO);
++
++
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java	
+@@ -0,0 +1,45 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import com.google.common.base.Preconditions;
++import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.convert.SubjectTypeConverter;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
++import edu.cugb.subject.infra.basic.service.SubjectMultipleService;
++import org.springframework.stereotype.Component;
++import org.springframework.util.CollectionUtils;
++
++import javax.annotation.Resource;
++import java.util.LinkedList;
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 19:45
++ * @Description: 多选题目的策略类
++ */
++@Component
++public class MultipleTypeHandler implements SubjectTypeHandler{
++    @Resource
++    SubjectMultipleService subjectMultipleService;
++    @Override
++    public SubjectInfoTypeEnum getHandlerType() {
++        return SubjectInfoTypeEnum.MULTIPLE;
++    }
++
++    @Override
++    public void add(SubjectInfoBO subjectInfoBO) {
++        //多选题插入
++        List<SubjectMultiple> subjectMultipleList = new LinkedList<>();
++        Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
++                "选项不能为空");
++        subjectInfoBO.getOptionList().forEach(option->{
++            SubjectMultiple subjectMultiple = SubjectTypeConverter.INSTANCE.convertAnswerBOToMultiple(option);
++            subjectMultiple.setSubjectId(subjectInfoBO.getId());
++            subjectMultiple.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
++            subjectMultipleList.add(subjectMultiple);
++        });
++        subjectMultipleService.batchInsert(subjectMultipleList);
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java	
+@@ -0,0 +1,48 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import com.google.common.base.Preconditions;
++import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.convert.SubjectTypeConverter;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++import edu.cugb.subject.infra.basic.service.SubjectJudgeService;
++import org.springframework.stereotype.Component;
++import org.springframework.util.CollectionUtils;
++
++import javax.annotation.Resource;
++import java.util.LinkedList;
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 19:45
++ * @Description: 判断题目的策略类
++ */
++@Component
++public class JudgeTypeHandler implements SubjectTypeHandler{
++
++    @Resource
++    private SubjectJudgeService subjectJudgeService;
++    @Override
++    public SubjectInfoTypeEnum getHandlerType() {
++        return SubjectInfoTypeEnum.JUDGE;
++    }
++
++    @Override
++    public void add(SubjectInfoBO subjectInfoBO) {
++        //判断题插入
++        List<SubjectJudge> subjectJudgeList = new LinkedList<>();
++        Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
++                "选项不能为空");
++        subjectInfoBO.getOptionList().forEach(option->{
++            SubjectJudge subjectJudge = SubjectTypeConverter.INSTANCE.convertAnswerBOToJudge(option);
++            subjectJudge.setSubjectId(subjectInfoBO.getId());
++            subjectJudge.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
++            subjectJudgeList.add(subjectJudge);
++        });
++        subjectJudgeService.batchInsert(subjectJudgeList);
++    }
++}
++
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java	
+@@ -0,0 +1,50 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import com.google.common.base.Preconditions;
++import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.convert.SubjectTypeConverter;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++import edu.cugb.subject.infra.basic.service.SubjectRadioService;
++import org.springframework.stereotype.Component;
++import org.springframework.util.CollectionUtils;
++
++import javax.annotation.Resource;
++import java.util.LinkedList;
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 19:45
++ * @Description: 单选题目的策略类
++ */
++@Component
++public class RadioTypeHandler implements SubjectTypeHandler{
++
++    @Resource
++    SubjectRadioService subjectRadioService;
++    @Override
++    public SubjectInfoTypeEnum getHandlerType() {
++        return SubjectInfoTypeEnum.RADIO;
++    }
++
++
++    @Override
++    public void add(SubjectInfoBO subjectInfoBO) {
++        //单选题插入
++        List<SubjectRadio> subjectRadioList = new LinkedList<>();
++        Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
++                "选项不能为空");
++        //插入选项信息
++        subjectInfoBO.getOptionList().forEach(option->{
++            SubjectRadio subjectRadio = SubjectTypeConverter.INSTANCE.convertAnswerBOToRadio(option);
++            subjectRadio.setSubjectId(subjectInfoBO.getId());
++            subjectRadio.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
++            subjectRadioList.add(subjectRadio);
++        });
++        subjectRadioService.batchInsert(subjectRadioList);
++
++
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectHandlerFactory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectHandlerFactory.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectHandlerFactory.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectHandlerFactory.java	
+@@ -0,0 +1,36 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import org.springframework.beans.factory.InitializingBean;
++import org.springframework.stereotype.Component;
++
++import javax.annotation.Resource;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 20:02
++ * @Description: 题目类型工厂
++ */
++@Component
++public class SubjectHandlerFactory implements InitializingBean {
++    @Resource
++    private List<SubjectTypeHandler> subjectTypeHandlerlist;
++
++    private Map<SubjectInfoTypeEnum, SubjectTypeHandler> handlerMap = new HashMap<>();
++
++    public SubjectTypeHandler getHandler(int subjectType){
++        SubjectInfoTypeEnum subjectInfoTypeEnum = SubjectInfoTypeEnum.getByCode(subjectType);
++        return handlerMap.get(subjectInfoTypeEnum);
++    }
++
++    @Override
++    public void afterPropertiesSet() throws Exception {
++        for (SubjectTypeHandler subjectTypeHandler : subjectTypeHandlerlist) {
++            handlerMap.put(subjectTypeHandler.getHandlerType(),subjectTypeHandler);
++        }
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java	
+@@ -0,0 +1,47 @@
++package edu.cugb.subject.domain.handler.subject;
++
++import com.google.common.base.Preconditions;
++import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
++import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
++import edu.cugb.subject.domain.convert.SubjectTypeConverter;
++import edu.cugb.subject.domain.entity.SubjectInfoBO;
++import edu.cugb.subject.infra.basic.entity.SubjectBrief;
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++import edu.cugb.subject.infra.basic.service.SubjectBriefService;
++import org.springframework.stereotype.Component;
++import org.springframework.util.CollectionUtils;
++
++import javax.annotation.Resource;
++import java.util.LinkedList;
++import java.util.List;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/25 19:45
++ * @Description: 简答题目的策略类
++ */
++@Component
++public class BriefTypeHandler implements SubjectTypeHandler{
++
++    @Resource
++    private SubjectBriefService subjectBriefService;
++    @Override
++    public SubjectInfoTypeEnum getHandlerType() {
++        return SubjectInfoTypeEnum.BRIEF;
++    }
++
++    @Override
++    public void add(SubjectInfoBO subjectInfoBO) {
++        //简答题插入
++        List<SubjectBrief> subjectBriefList = new LinkedList<>();
++        Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
++                "选项不能为空");
++        subjectInfoBO.getOptionList().forEach(option->{
++            SubjectBrief subjectBrief = SubjectTypeConverter.INSTANCE.convertAnswerBOToBrief(option);
++            subjectBrief.setSubjectId(subjectInfoBO.getId());
++            subjectBrief.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
++            subjectBriefList.add(subjectBrief);
++        });
++        subjectBriefService.batchInsert(subjectBriefList);
++    }
++}
+Index: club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java	
+@@ -0,0 +1,28 @@
++package edu.cugb.subject.domain.convert;
++
++import edu.cugb.subject.domain.entity.SubjectAnswerBO;
++import edu.cugb.subject.infra.basic.entity.SubjectBrief;
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++import org.mapstruct.Mapper;
++import org.mapstruct.factory.Mappers;
++
++/**
++ * @Author pengjia
++ * @Data 2024/10/17 15:19
++ * @Description:
++ */
++@Mapper
++public interface SubjectTypeConverter {
++    SubjectTypeConverter INSTANCE = Mappers.getMapper(SubjectTypeConverter.class);
++
++    SubjectRadio convertAnswerBOToRadio(SubjectAnswerBO subjectAnswerBO);
++
++
++    SubjectMultiple convertAnswerBOToMultiple(SubjectAnswerBO subjectAnswerBO);
++
++    SubjectJudge convertAnswerBOToJudge(SubjectAnswerBO subjectAnswerBO);
++
++    SubjectBrief convertAnswerBOToBrief(SubjectAnswerBO subjectAnswerBO);
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.infra.basic.mapper;
++
++import edu.cugb.subject.infra.basic.entity.SubjectBrief;
++import org.apache.ibatis.annotations.Param;
++import java.util.List;
++
++/**
++ * 简答题(SubjectBrief)表数据库访问层
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:00
++ */
++public interface SubjectBriefDao {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectBrief queryById(Long id);
++
++    /**
++     * 查询指定行数据
++     *
++     * @param subjectBrief 查询条件
++     * @return 对象列表
++     */
++    List<SubjectBrief> queryAllByLimit(SubjectBrief subjectBrief);
++
++    /**
++     * 统计总行数
++     *
++     * @param subjectBrief 查询条件
++     * @return 总行数
++     */
++    long count(SubjectBrief subjectBrief);
++
++    /**
++     * 新增数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 影响行数
++     */
++    int insert(SubjectBrief subjectBrief);
++
++    /**
++     * 批量新增数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectBrief> 实例对象列表
++     * @return 影响行数
++     */
++    int insertBatch(@Param("entities") List<SubjectBrief> entities);
++
++    /**
++     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectBrief> 实例对象列表
++     * @return 影响行数
++     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
++     */
++    int insertOrUpdateBatch(@Param("entities") List<SubjectBrief> entities);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 影响行数
++     */
++    int update(SubjectBrief subjectBrief);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 影响行数
++     */
++    int deleteById(Long id);
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java	
+@@ -0,0 +1,69 @@
++package edu.cugb.subject.infra.basic.service.impl;
++
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++import edu.cugb.subject.infra.basic.mapper.SubjectInfoDao;
++import edu.cugb.subject.infra.basic.service.SubjectInfoService;
++import org.springframework.stereotype.Service;
++
++
++import javax.annotation.Resource;
++
++/**
++ * 题目信息表(SubjectInfo)表服务实现类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Service("subjectInfoService")
++public class SubjectInfoServiceImpl implements SubjectInfoService {
++    @Resource
++    private SubjectInfoDao subjectInfoDao;
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    @Override
++    public SubjectInfo queryById(Long id) {
++        return this.subjectInfoDao.queryById(id);
++    }
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectInfo insert(SubjectInfo subjectInfo) {
++        this.subjectInfoDao.insert(subjectInfo);
++        return subjectInfo;
++    }
++
++    /**
++     * 修改数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectInfo update(SubjectInfo subjectInfo) {
++        this.subjectInfoDao.update(subjectInfo);
++        return this.queryById(subjectInfo.getId());
++    }
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    @Override
++    public boolean deleteById(Long id) {
++        return this.subjectInfoDao.deleteById(id) > 0;
++    }
++}
+Index: club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml b/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml	
+@@ -0,0 +1,164 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="edu.cugb.subject.infra.basic.mapper.SubjectBriefDao">
++
++    <resultMap type="edu.cugb.subject.infra.basic.entity.SubjectBrief" id="SubjectBriefMap">
++        <result property="id" column="id" jdbcType="INTEGER"/>
++        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
++        <result property="subjectAnswer" column="subject_answer" jdbcType="VARCHAR"/>
++        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
++        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
++        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
++        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
++        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
++    </resultMap>
++
++    <!--查询单个-->
++    <select id="queryById" resultMap="SubjectBriefMap">
++        select id,
++               subject_id,
++               subject_answer,
++               created_by,
++               created_time,
++               update_by,
++               update_time,
++               is_deleted
++        from subject_brief
++        where id = #{id}
++    </select>
++
++    <!--查询指定行数据-->
++    <select id="queryAllByLimit" resultMap="SubjectBriefMap">
++        select
++        id,
++        subject_id,
++        subject_answer,
++        created_by,
++        created_time,
++        update_by,
++        update_time,
++        is_deleted
++        from subject_brief
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="subjectAnswer != null and subjectAnswer != ''">
++                and subject_answer = #{subjectAnswer}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++        limit #{pageable.offset}, #{pageable.pageSize}
++    </select>
++
++    <!--统计总行数-->
++    <select id="count" resultType="java.lang.Long">
++        select count(1)
++        from subject_brief
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="subjectAnswer != null and subjectAnswer != ''">
++                and subject_answer = #{subjectAnswer}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++    </select>
++
++    <!--新增所有列-->
++    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_brief(subject_id,subject_answer,created_by,created_time,update_by,update_time,is_deleted)
++        values (#{subjectId},#{subjectAnswer},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
++    </insert>
++
++    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_brief(subject_id,subject_answer,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++        (#{entity.subjectId},#{entity.subjectAnswer},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++    </insert>
++
++    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_brief(subject_id,subject_answer,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.subjectAnswer},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++        on duplicate key update
++        subject_id = values(subject_id),subject_answer = values(subject_answer),created_by =
++        values(created_by),created_time = values(created_time),update_by = values(update_by),update_time =
++        values(update_time),is_deleted = values(is_deleted)
++    </insert>
++
++    <!--通过主键修改数据-->
++    <update id="update">
++        update subject_brief
++        <set>
++            <if test="subjectId != null">
++                subject_id = #{subjectId},
++            </if>
++            <if test="subjectAnswer != null and subjectAnswer != ''">
++                subject_answer = #{subjectAnswer},
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                created_by = #{createdBy},
++            </if>
++            <if test="createdTime != null">
++                created_time = #{createdTime},
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                update_by = #{updateBy},
++            </if>
++            <if test="updateTime != null">
++                update_time = #{updateTime},
++            </if>
++            <if test="isDeleted != null">
++                is_deleted = #{isDeleted},
++            </if>
++        </set>
++        where id = #{id}
++    </update>
++
++    <!--通过主键删除-->
++    <delete id="deleteById">
++        delete from subject_brief where id = #{id}
++    </delete>
++
++</mapper>
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectBrief.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectBrief.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectBrief.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectBrief.java	
+@@ -0,0 +1,50 @@
++package edu.cugb.subject.infra.basic.entity;
++
++import lombok.Data;
++
++import java.util.Date;
++import java.io.Serializable;
++
++/**
++ * 简答题(SubjectBrief)实体类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:00
++ */
++@Data
++public class SubjectBrief implements Serializable {
++    private static final long serialVersionUID = 895365661512910156L;
++    /**
++     * 主键
++     */
++    private Long id;
++    /**
++     * 题目id
++     */
++    private Long subjectId;
++    /**
++     * 题目答案
++     */
++    private String subjectAnswer;
++    /**
++     * 创建人
++     */
++    private String createdBy;
++    /**
++     * 创建时间
++     */
++    private Date createdTime;
++    /**
++     * 更新人
++     */
++    private String updateBy;
++    /**
++     * 更新时间
++     */
++    private Date updateTime;
++
++    private Integer isDeleted;
++
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectInfo.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectInfo.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectInfo.java	
+@@ -0,0 +1,66 @@
++package edu.cugb.subject.infra.basic.entity;
++
++import lombok.Data;
++
++import java.util.Date;
++import java.io.Serializable;
++
++/**
++ * 题目信息表(SubjectInfo)实体类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++@Data
++public class SubjectInfo implements Serializable {
++    private static final long serialVersionUID = -71684389794293822L;
++    /**
++     * 主键
++     */
++    private Long id;
++    /**
++     * 题目名称
++     */
++    private String subjectName;
++    /**
++     * 题目难度
++     */
++    private Integer subjectDifficult;
++    /**
++     * 出题人名
++     */
++    private String settleName;
++    /**
++     * 题目类型 1单选 2多选 3判断 4简答
++     */
++    private Integer subjectType;
++    /**
++     * 题目分数
++     */
++    private Integer subjectScore;
++    /**
++     * 题目解析
++     */
++    private String subjectParse;
++    /**
++     * 创建人
++     */
++    private String createdBy;
++    /**
++     * 创建时间
++     */
++    private Date createdTime;
++    /**
++     * 修改人
++     */
++    private String updateBy;
++    /**
++     * 修改时间
++     */
++    private Date updateTime;
++
++    private Integer isDeleted;
++
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.infra.basic.mapper;
++
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++import org.apache.ibatis.annotations.Param;
++import java.util.List;
++
++/**
++ * 题目信息表(SubjectInfo)表数据库访问层
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:10
++ */
++public interface SubjectInfoDao {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectInfo queryById(Long id);
++
++    /**
++     * 查询指定行数据
++     *
++     * @param subjectInfo 查询条件
++     * @return 对象列表
++     */
++    List<SubjectInfo> queryAllByLimit(SubjectInfo subjectInfo);
++
++    /**
++     * 统计总行数
++     *
++     * @param subjectInfo 查询条件
++     * @return 总行数
++     */
++    long count(SubjectInfo subjectInfo);
++
++    /**
++     * 新增数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 影响行数
++     */
++    int insert(SubjectInfo subjectInfo);
++
++    /**
++     * 批量新增数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectInfo> 实例对象列表
++     * @return 影响行数
++     */
++    int insertBatch(@Param("entities") List<SubjectInfo> entities);
++
++    /**
++     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectInfo> 实例对象列表
++     * @return 影响行数
++     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
++     */
++    int insertOrUpdateBatch(@Param("entities") List<SubjectInfo> entities);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 影响行数
++     */
++    int update(SubjectInfo subjectInfo);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 影响行数
++     */
++    int deleteById(Long id);
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java	
+@@ -0,0 +1,48 @@
++package edu.cugb.subject.infra.basic.service;
++
++import edu.cugb.subject.infra.basic.entity.SubjectInfo;
++
++
++/**
++ * 题目信息表(SubjectInfo)表服务接口
++ *
++ * @author makejava
++ * @since 2024-10-25 15:42:11
++ */
++public interface SubjectInfoService {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectInfo queryById(Long id);
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 实例对象
++     */
++    SubjectInfo insert(SubjectInfo subjectInfo);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectInfo 实例对象
++     * @return 实例对象
++     */
++    SubjectInfo update(SubjectInfo subjectInfo);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    boolean deleteById(Long id);
++
++}
+Index: club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml b/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml	
+@@ -0,0 +1,217 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="edu.cugb.subject.infra.basic.mapper.SubjectInfoDao">
++
++    <resultMap type="edu.cugb.subject.infra.basic.entity.SubjectInfo" id="SubjectInfoMap">
++        <result property="id" column="id" jdbcType="INTEGER"/>
++        <result property="subjectName" column="subject_name" jdbcType="VARCHAR"/>
++        <result property="subjectDifficult" column="subject_difficult" jdbcType="INTEGER"/>
++        <result property="settleName" column="settle_name" jdbcType="VARCHAR"/>
++        <result property="subjectType" column="subject_type" jdbcType="INTEGER"/>
++        <result property="subjectScore" column="subject_score" jdbcType="INTEGER"/>
++        <result property="subjectParse" column="subject_parse" jdbcType="VARCHAR"/>
++        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
++        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
++        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
++        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
++        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
++    </resultMap>
++
++    <!--查询单个-->
++    <select id="queryById" resultMap="SubjectInfoMap">
++        select id,
++               subject_name,
++               subject_difficult,
++               settle_name,
++               subject_type,
++               subject_score,
++               subject_parse,
++               created_by,
++               created_time,
++               update_byup,
++               date_time,
++               is_deleted
++        from subject_info
++        where id = #{id}
++    </select>
++
++    <!--查询指定行数据-->
++    <select id="queryAllByLimit" resultMap="SubjectInfoMap">
++        select
++        id,
++        subject_name,
++        subject_difficult,
++        settle_name,
++        subject_type,
++        subject_score,
++        subject_parse,
++        created_by,
++        created_time,
++        update_byup,
++        date_time,
++        is_deleted
++        from subject_info
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectName != null and subjectName != ''">
++                and subject_name = #{subjectName}
++            </if>
++            <if test="subjectDifficult != null">
++                and subject_difficult = #{subjectDifficult}
++            </if>
++            <if test="settleName != null and settleName != ''">
++                and settle_name = #{settleName}
++            </if>
++            <if test="subjectType != null">
++                and subject_type = #{subjectType}
++            </if>
++            <if test="subjectScore != null">
++                and subject_score = #{subjectScore}
++            </if>
++            <if test="subjectParse != null and subjectParse != ''">
++                and subject_parse = #{subjectParse}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++        limit #{pageable.offset}, #{pageable.pageSize}
++    </select>
++
++    <!--统计总行数-->
++    <select id="count" resultType="java.lang.Long">
++        select count(1)
++        from subject_info
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectName != null and subjectName != ''">
++                and subject_name = #{subjectName}
++            </if>
++            <if test="subjectDifficult != null">
++                and subject_difficult = #{subjectDifficult}
++            </if>
++            <if test="settleName != null and settleName != ''">
++                and settle_name = #{settleName}
++            </if>
++            <if test="subjectType != null">
++                and subject_type = #{subjectType}
++            </if>
++            <if test="subjectScore != null">
++                and subject_score = #{subjectScore}
++            </if>
++            <if test="subjectParse != null and subjectParse != ''">
++                and subject_parse = #{subjectParse}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++    </select>
++
++    <!--新增所有列-->
++    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_info(subject_name,subject_difficult,settle_name,subject_type,subject_score,subject_parse,created_by,created_time,update_by,update_time,is_deleted)
++        values (#{subjectName},#{subjectDifficult},#{settleName},#{subjectType},#{subjectScore},#{subjectParse},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
++    </insert>
++
++    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into
++        subject_info(subject_name,subject_difficult,settle_name,subject_type,subject_score,subject_parse,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectName},#{entity.subjectDifficult},#{entity.settleName},#{entity.subjectType},#{entity.subjectScore},#{entity.subjectParse},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++    </insert>
++
++    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into
++        subject_info(subject_name,subject_difficult,settle_name,subject_type,subject_score,subject_parse,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectName},#{entity.subjectDifficult},#{entity.settleName},#{entity.subjectType},#{entity.subjectScore},#{entity.subjectParse},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++        on duplicate key update
++        subject_name = values(subject_name),subject_difficult = values(subject_difficult),settle_name =
++        values(settle_name),subject_type = values(subject_type),subject_score = values(subject_score),subject_parse =
++        values(subject_parse),created_by = values(created_by),created_time = values(created_time),update_by =
++        values(update_by),update_time = values(update_time),is_deleted = values(is_deleted)
++    </insert>
++
++    <!--通过主键修改数据-->
++    <update id="update">
++        update subject_info
++        <set>
++            <if test="subjectName != null and subjectName != ''">
++                subject_name = #{subjectName},
++            </if>
++            <if test="subjectDifficult != null">
++                subject_difficult = #{subjectDifficult},
++            </if>
++            <if test="settleName != null and settleName != ''">
++                settle_name = #{settleName},
++            </if>
++            <if test="subjectType != null">
++                subject_type = #{subjectType},
++            </if>
++            <if test="subjectScore != null">
++                subject_score = #{subjectScore},
++            </if>
++            <if test="subjectParse != null and subjectParse != ''">
++                subject_parse = #{subjectParse},
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                created_by = #{createdBy},
++            </if>
++            <if test="createdTime != null">
++                created_time = #{createdTime},
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                update_by = #{updateBy},
++            </if>
++            <if test="updateTime != null">
++                update_time = #{updateTime},
++            </if>
++            <if test="isDeleted != null">
++                is_deleted = #{isDeleted},
++            </if>
++        </set>
++        where id = #{id}
++    </update>
++
++    <!--通过主键删除-->
++    <delete id="deleteById">
++        delete
++        from subject_info
++        where id = #{id}
++    </delete>
++
++</mapper>
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java	
+@@ -0,0 +1,57 @@
++package edu.cugb.subject.infra.basic.service;
++
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++
++import java.util.List;
++
++
++/**
++ * 判断题(SubjectJudge)表服务接口
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:24
++ */
++public interface SubjectJudgeService {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectJudge queryById(Long id);
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 实例对象
++     */
++    SubjectJudge insert(SubjectJudge subjectJudge);
++
++    /**
++     * 批量新增判断题
++     * @param subjectJudgeList
++     */
++    void batchInsert(List<SubjectJudge> subjectJudgeList);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 实例对象
++     */
++    SubjectJudge update(SubjectJudge subjectJudge);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    boolean deleteById(Long id);
++
++
++}
+Index: club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml b/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml	
+@@ -0,0 +1,183 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="edu.cugb.subject.infra.basic.mapper.SubjectJudgeDao">
++
++    <resultMap type="edu.cugb.subject.infra.basic.entity.SubjectJudge" id="SubjectJudgeMap">
++        <result property="id" column="id" jdbcType="INTEGER"/>
++        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
++        <result property="isCorrect" column="is_correct" jdbcType="INTEGER"/>
++        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
++        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
++        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
++        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
++        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
++    </resultMap>
++
++    <!--查询单个-->
++    <select id="queryById" resultMap="SubjectJudgeMap">
++        select id,
++               subject_id,
++               is_correct,
++               created_by,
++               created_time,
++               update_by,
++               update_time,
++               is_deleted
++        from subject_judge
++        where id = #{id}
++    </select>
++
++    <!--查询指定行数据-->
++    <select id="queryAllByLimit" resultMap="SubjectJudgeMap">
++        select
++        id,
++        subject_id,
++        is_correct,
++        created_by,
++        created_time,
++        update_by,
++        update_time,
++        is_deleted
++        from subject_judge
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++        limit #{pageable.offset}, #{pageable.pageSize}
++    </select>
++
++    <!--统计总行数-->
++    <select id="count" resultType="java.lang.Long">
++        select count(1)
++        from subject_judge
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++    </select>
++
++    <!--新增所有列-->
++    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_judge(subject_id,
++                                  is_correct,
++                                  created_by,
++                                  created_time,
++                                  update_by,
++                                  update_time,
++                                  is_deleted)
++        values (#{subjectId},#{isCorrect},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
++    </insert>
++
++    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_judge(subject_id,
++                                  is_correct,
++                                  created_by,
++                                  created_time,
++                                  update_by,
++                                  update_time,
++                                  is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++    </insert>
++
++    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_judge(
++        subject_id,
++        is_correct,
++        created_by,
++        created_time,
++        update_by,
++        update_time,
++        is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++        on duplicate key update
++        subject_id = values(subject_id),is_correct = values(is_correct),created_by = values(created_by),created_time =
++        values(created_time),update_by = values(update_by),update_time = values(update_time),is_deleted =
++        values(is_deleted)
++    </insert>
++
++    <!--通过主键修改数据-->
++    <update id="update">
++        update subject_judge
++        <set>
++            <if test="subjectId != null">
++                subject_id = #{subjectId},
++            </if>
++            <if test="isCorrect != null">
++                is_correct = #{isCorrect},
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                created_by = #{createdBy},
++            </if>
++            <if test="createdTime != null">
++                created_time = #{createdTime},
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                update_by = #{updateBy},
++            </if>
++            <if test="updateTime != null">
++                update_time = #{updateTime},
++            </if>
++            <if test="isDeleted != null">
++                is_deleted = #{isDeleted},
++            </if>
++        </set>
++        where id = #{id}
++    </update>
++
++    <!--通过主键删除-->
++    <delete id="deleteById">
++        delete from subject_judge where id = #{id}
++    </delete>
++
++</mapper>
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectMultipleDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectMultipleDao.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectMultipleDao.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectMultipleDao.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.infra.basic.mapper;
++
++import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
++import org.apache.ibatis.annotations.Param;
++import java.util.List;
++
++/**
++ * 多选题信息表(SubjectMultiple)表数据库访问层
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:02
++ */
++public interface SubjectMultipleDao {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectMultiple queryById(Long id);
++
++    /**
++     * 查询指定行数据
++     *
++     * @param subjectMultiple 查询条件
++     * @return 对象列表
++     */
++    List<SubjectMultiple> queryAllByLimit(SubjectMultiple subjectMultiple);
++
++    /**
++     * 统计总行数
++     *
++     * @param subjectMultiple 查询条件
++     * @return 总行数
++     */
++    long count(SubjectMultiple subjectMultiple);
++
++    /**
++     * 新增数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 影响行数
++     */
++    int insert(SubjectMultiple subjectMultiple);
++
++    /**
++     * 批量新增数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectMultiple> 实例对象列表
++     * @return 影响行数
++     */
++    int insertBatch(@Param("entities") List<SubjectMultiple> entities);
++
++    /**
++     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectMultiple> 实例对象列表
++     * @return 影响行数
++     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
++     */
++    int insertOrUpdateBatch(@Param("entities") List<SubjectMultiple> entities);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 影响行数
++     */
++    int update(SubjectMultiple subjectMultiple);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 影响行数
++     */
++    int deleteById(Long id);
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java	
+@@ -0,0 +1,75 @@
++package edu.cugb.subject.infra.basic.service.impl;
++
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++import edu.cugb.subject.infra.basic.mapper.SubjectJudgeDao;
++import edu.cugb.subject.infra.basic.service.SubjectJudgeService;
++import org.springframework.stereotype.Service;
++
++
++import javax.annotation.Resource;
++import java.util.List;
++
++/**
++ * 判断题(SubjectJudge)表服务实现类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:24
++ */
++@Service("subjectJudgeService")
++public class SubjectJudgeServiceImpl implements SubjectJudgeService {
++    @Resource
++    private SubjectJudgeDao subjectJudgeDao;
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    @Override
++    public SubjectJudge queryById(Long id) {
++        return this.subjectJudgeDao.queryById(id);
++    }
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectJudge insert(SubjectJudge subjectJudge) {
++        this.subjectJudgeDao.insert(subjectJudge);
++        return subjectJudge;
++    }
++
++    @Override
++    public void batchInsert(List<SubjectJudge> subjectJudgeList) {
++        this.subjectJudgeDao.insertBatch(subjectJudgeList);
++    }
++
++    /**
++     * 修改数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectJudge update(SubjectJudge subjectJudge) {
++        this.subjectJudgeDao.update(subjectJudge);
++        return this.queryById(subjectJudge.getId());
++    }
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    @Override
++    public boolean deleteById(Long id) {
++        return this.subjectJudgeDao.deleteById(id) > 0;
++    }
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java	
+@@ -0,0 +1,73 @@
++package edu.cugb.subject.infra.basic.service.impl;
++
++import edu.cugb.subject.infra.basic.entity.SubjectBrief;
++import edu.cugb.subject.infra.basic.mapper.SubjectBriefDao;
++import edu.cugb.subject.infra.basic.service.SubjectBriefService;
++import org.springframework.stereotype.Service;
++
++import javax.annotation.Resource;
++import java.util.List;
++
++/**
++ * 简答题(SubjectBrief)表服务实现类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:00
++ */
++@Service("subjectBriefService")
++public class SubjectBriefServiceImpl implements SubjectBriefService {
++    @Resource
++    private SubjectBriefDao subjectBriefDao;
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    @Override
++    public SubjectBrief queryById(Long id) {
++        return this.subjectBriefDao.queryById(id);
++    }
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectBrief insert(SubjectBrief subjectBrief) {
++        this.subjectBriefDao.insert(subjectBrief);
++        return subjectBrief;
++    }
++
++    @Override
++    public void batchInsert(List<SubjectBrief> subjectBriefList) {
++        this.subjectBriefDao.insertBatch(subjectBriefList);
++    }
++
++    /**
++     * 修改数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectBrief update(SubjectBrief subjectBrief) {
++        this.subjectBriefDao.update(subjectBrief);
++        return this.queryById(subjectBrief.getId());
++    }
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    @Override
++    public boolean deleteById(Long id) {
++        return this.subjectBriefDao.deleteById(id) > 0;
++    }
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java	
+@@ -0,0 +1,55 @@
++package edu.cugb.subject.infra.basic.service;
++
++import edu.cugb.subject.infra.basic.entity.SubjectBrief;
++
++import java.util.List;
++
++/**
++ * 简答题(SubjectBrief)表服务接口
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:00
++ */
++public interface SubjectBriefService {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectBrief queryById(Long id);
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 实例对象
++     */
++    SubjectBrief insert(SubjectBrief subjectBrief);
++
++    /**
++     * 批量新增简答题
++     * @param subjectBriefList
++     */
++    void batchInsert(List<SubjectBrief> subjectBriefList);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectBrief 实例对象
++     * @return 实例对象
++     */
++    SubjectBrief update(SubjectBrief subjectBrief);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    boolean deleteById(Long id);
++
++
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectJudge.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectJudge.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectJudge.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectJudge.java	
+@@ -0,0 +1,52 @@
++package edu.cugb.subject.infra.basic.entity;
++
++import lombok.Data;
++
++import java.util.Date;
++import java.io.Serializable;
++
++/**
++ * 判断题(SubjectJudge)实体类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:24
++ */
++@Data
++public class SubjectJudge implements Serializable {
++    private static final long serialVersionUID = -50072362567885200L;
++/**
++     * 主键
++     */
++    private Long id;
++/**
++     * 题目id
++     */
++    private Long subjectId;
++/**
++     * 是否正确
++     */
++    private Integer isCorrect;
++/**
++     * 创建人
++     */
++    private String createdBy;
++/**
++     * 创建时间
++     */
++    private Date createdTime;
++/**
++     * 更新人
++     */
++    private String updateBy;
++/**
++     * 更新时间
++     */
++    private Date updateTime;
++
++    private Integer isDeleted;
++
++
++
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectJudgeDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectJudgeDao.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectJudgeDao.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectJudgeDao.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.infra.basic.mapper;
++
++import edu.cugb.subject.infra.basic.entity.SubjectJudge;
++import org.apache.ibatis.annotations.Param;
++import java.util.List;
++
++/**
++ * 判断题(SubjectJudge)表数据库访问层
++ *
++ * @author makejava
++ * @since 2024-10-25 15:43:24
++ */
++public interface SubjectJudgeDao {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectJudge queryById(Long id);
++
++    /**
++     * 查询指定行数据
++     *
++     * @param subjectJudge 查询条件
++     * @return 对象列表
++     */
++    List<SubjectJudge> queryAllByLimit(SubjectJudge subjectJudge);
++
++    /**
++     * 统计总行数
++     *
++     * @param subjectJudge 查询条件
++     * @return 总行数
++     */
++    long count(SubjectJudge subjectJudge);
++
++    /**
++     * 新增数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 影响行数
++     */
++    int insert(SubjectJudge subjectJudge);
++
++    /**
++     * 批量新增数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectJudge> 实例对象列表
++     * @return 影响行数
++     */
++    int insertBatch(@Param("entities") List<SubjectJudge> entities);
++
++    /**
++     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectJudge> 实例对象列表
++     * @return 影响行数
++     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
++     */
++    int insertOrUpdateBatch(@Param("entities") List<SubjectJudge> entities);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectJudge 实例对象
++     * @return 影响行数
++     */
++    int update(SubjectJudge subjectJudge);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 影响行数
++     */
++    int deleteById(Long id);
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectRadio.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectRadio.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectRadio.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectRadio.java	
+@@ -0,0 +1,60 @@
++package edu.cugb.subject.infra.basic.entity;
++
++import lombok.Data;
++
++import java.util.Date;
++import java.io.Serializable;
++
++/**
++ * 单选题信息表(SubjectRadio)实体类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:19
++ */
++@Data
++public class SubjectRadio implements Serializable {
++    private static final long serialVersionUID = -17774309016526532L;
++/**
++     * 主键
++     */
++    private Long id;
++/**
++     * 题目id
++     */
++    private Long subjectId;
++/**
++     * a,b,c,d
++     */
++    private Integer optionType;
++/**
++     * 选项内容
++     */
++    private String optionContent;
++/**
++     * 是否正确
++     */
++    private Integer isCorrect;
++/**
++     * 创建人
++     */
++    private String createdBy;
++/**
++     * 创建时间
++     */
++    private Date createdTime;
++/**
++     * 修改人
++     */
++    private String updateBy;
++/**
++     * 修改时间
++     */
++    private Date updateTime;
++
++    private Integer isDeleted;
++
++
++
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectRadioDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectRadioDao.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectRadioDao.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectRadioDao.java	
+@@ -0,0 +1,81 @@
++package edu.cugb.subject.infra.basic.mapper;
++
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++import org.apache.ibatis.annotations.Param;
++import java.util.List;
++
++/**
++ * 单选题信息表(SubjectRadio)表数据库访问层
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:19
++ */
++public interface SubjectRadioDao {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectRadio queryById(Long id);
++
++    /**
++     * 查询指定行数据
++     *
++     * @param subjectRadio 查询条件
++     * @return 对象列表
++     */
++    List<SubjectRadio> queryAllByLimit(SubjectRadio subjectRadio);
++
++    /**
++     * 统计总行数
++     *
++     * @param subjectRadio 查询条件
++     * @return 总行数
++     */
++    long count(SubjectRadio subjectRadio);
++
++    /**
++     * 新增数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 影响行数
++     */
++    int insert(SubjectRadio subjectRadio);
++
++    /**
++     * 批量新增数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectRadio> 实例对象列表
++     * @return 影响行数
++     */
++    int insertBatch(@Param("entities") List<SubjectRadio> entities);
++
++    /**
++     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
++     *
++     * @param entities List<SubjectRadio> 实例对象列表
++     * @return 影响行数
++     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
++     */
++    int insertOrUpdateBatch(@Param("entities") List<SubjectRadio> entities);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 影响行数
++     */
++    int update(SubjectRadio subjectRadio);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 影响行数
++     */
++    int deleteById(Long id);
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java	
+@@ -0,0 +1,58 @@
++package edu.cugb.subject.infra.basic.service;
++
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++
++import java.util.List;
++
++/**
++ * 单选题信息表(SubjectRadio)表服务接口
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:19
++ */
++public interface SubjectRadioService {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectRadio queryById(Long id);
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 实例对象
++     */
++    SubjectRadio insert(SubjectRadio subjectRadio);
++
++    /**
++     * 批量插入单选题
++     * @param subjectRadioList
++     * @return
++     */
++    void batchInsert(List<SubjectRadio> subjectRadioList);
++
++
++
++    /**
++     * 修改数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 实例对象
++     */
++    SubjectRadio update(SubjectRadio subjectRadio);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    boolean deleteById(Long id);
++
++}
+Index: club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml b/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml	
+@@ -0,0 +1,194 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="edu.cugb.subject.infra.basic.mapper.SubjectRadioDao">
++
++    <resultMap type="edu.cugb.subject.infra.basic.entity.SubjectRadio" id="SubjectRadioMap">
++        <result property="id" column="id" jdbcType="INTEGER"/>
++        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
++        <result property="optionType" column="option_type" jdbcType="INTEGER"/>
++        <result property="optionContent" column="option_content" jdbcType="VARCHAR"/>
++        <result property="isCorrect" column="is_correct" jdbcType="INTEGER"/>
++        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
++        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
++        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
++        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
++        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
++    </resultMap>
++
++    <!--查询单个-->
++    <select id="queryById" resultMap="SubjectRadioMap">
++        select id,
++               subject_id,
++               option_type,
++               option_content,
++               is_correct,
++               created_by,
++               created_time,
++               update_by,
++               update_time,
++               is_deleted
++        from subject_radio
++        where id = #{id}
++    </select>
++
++    <!--查询指定行数据-->
++    <select id="queryAllByLimit" resultMap="SubjectRadioMap">
++        select
++        id,subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted
++        from subject_radio
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="optionType != null">
++                and option_type = #{optionType}
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                and option_content = #{optionContent}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++        limit #{pageable.offset}, #{pageable.pageSize}
++    </select>
++
++    <!--统计总行数-->
++    <select id="count" resultType="java.lang.Long">
++        select count(1)
++        from subject_radio
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="optionType != null">
++                and option_type = #{optionType}
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                and option_content = #{optionContent}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++    </select>
++
++    <!--新增所有列-->
++    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_radio(subject_id, option_type, option_content, is_correct, created_by, created_time,
++                                  update_by, update_time, is_deleted)
++        values (#{subjectId}, #{optionType}, #{optionContent}, #{isCorrect}, #{createdBy}, #{createdTime}, #{updateBy},
++                #{updateTime}, #{isDeleted})
++    </insert>
++
++    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_radio (
++        subject_id,
++        option_type,
++        option_content,
++        is_correct,
++        created_by,
++        created_time,
++        update_by,
++        update_time,
++        is_deleted
++        ) values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++    </insert>
++
++    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into
++        subject_radio(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++        on duplicate key update
++        subject_id = values(subject_id),option_type = values(option_type),option_content =
++        values(option_content),is_correct = values(is_correct),created_by = values(created_by),created_time =
++        values(created_time),update_by = values(update_by),update_time = values(update_time),is_deleted =
++        values(is_deleted)
++    </insert>
++
++    <!--通过主键修改数据-->
++    <update id="update">
++        update subject_radio
++        <set>
++            <if test="subjectId != null">
++                subject_id = #{subjectId},
++            </if>
++            <if test="optionType != null">
++                option_type = #{optionType},
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                option_content = #{optionContent},
++            </if>
++            <if test="isCorrect != null">
++                is_correct = #{isCorrect},
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                created_by = #{createdBy},
++            </if>
++            <if test="createdTime != null">
++                created_time = #{createdTime},
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                update_by = #{updateBy},
++            </if>
++            <if test="updateTime != null">
++                update_time = #{updateTime},
++            </if>
++            <if test="isDeleted != null">
++                is_deleted = #{isDeleted},
++            </if>
++        </set>
++        where id = #{id}
++    </update>
++
++    <!--通过主键删除-->
++    <delete id="deleteById">
++        delete
++        from subject_radio
++        where id = #{id}
++    </delete>
++
++</mapper>
++
+Index: club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml b/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml	
+@@ -0,0 +1,195 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="edu.cugb.subject.infra.basic.mapper.SubjectMultipleDao">
++
++    <resultMap type="edu.cugb.subject.infra.basic.entity.SubjectMultiple" id="SubjectMultipleMap">
++        <result property="id" column="id" jdbcType="INTEGER"/>
++        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
++        <result property="optionType" column="option_type" jdbcType="INTEGER"/>
++        <result property="optionContent" column="option_content" jdbcType="VARCHAR"/>
++        <result property="isCorrect" column="is_correct" jdbcType="INTEGER"/>
++        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
++        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
++        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
++        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
++        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
++    </resultMap>
++
++    <!--查询单个-->
++    <select id="queryById" resultMap="SubjectMultipleMap">
++        select id,
++               subject_id,
++               option_type,
++               option_content,
++               is_correct,
++               created_by,
++               created_time,
++               update_by,
++               update_time,
++               is_deleted
++        from subject_multiple
++        where id = #{id}
++    </select>
++
++    <!--查询指定行数据-->
++    <select id="queryAllByLimit" resultMap="SubjectMultipleMap">
++        select id,
++        subject_id,
++        option_type,
++        option_content,
++        is_correct,
++        created_by,
++        created_time,
++        update_by,
++        update_time,
++        is_deleted
++
++        from subject_multiple
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="optionType != null">
++                and option_type = #{optionType}
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                and option_content = #{optionContent}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++        limit #{pageable.offset}, #{pageable.pageSize}
++    </select>
++
++    <!--统计总行数-->
++    <select id="count" resultType="java.lang.Long">
++        select count(1)
++        from subject_multiple
++        <where>
++            <if test="id != null">
++                and id = #{id}
++            </if>
++            <if test="subjectId != null">
++                and subject_id = #{subjectId}
++            </if>
++            <if test="optionType != null">
++                and option_type = #{optionType}
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                and option_content = #{optionContent}
++            </if>
++            <if test="isCorrect != null">
++                and is_correct = #{isCorrect}
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                and created_by = #{createdBy}
++            </if>
++            <if test="createdTime != null">
++                and created_time = #{createdTime}
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                and update_by = #{updateBy}
++            </if>
++            <if test="updateTime != null">
++                and update_time = #{updateTime}
++            </if>
++            <if test="isDeleted != null">
++                and is_deleted = #{isDeleted}
++            </if>
++        </where>
++    </select>
++
++    <!--新增所有列-->
++    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
++        values (#{subjectId},#{optionType},#{optionContent},#{isCorrect},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
++    </insert>
++
++    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++        (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++    </insert>
++
++    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
++        insert into
++        subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
++        values
++        <foreach collection="entities" item="entity" separator=",">
++            (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
++        </foreach>
++        on duplicate key update
++        subject_id = values(subject_id),
++        option_type = values(option_type),
++        option_content =values(option_content),
++        is_correct = values(is_correct),
++        created_by = values(created_by),
++        created_time = values(created_time),
++        update_by = values(update_by),
++        update_time = values(update_time),
++        is_deleted = values(is_deleted)
++    </insert>
++
++    <!--通过主键修改数据-->
++    <update id="update">
++        update subject_multiple
++        <set>
++            <if test="subjectId != null">
++                subject_id = #{subjectId},
++            </if>
++            <if test="optionType != null">
++                option_type = #{optionType},
++            </if>
++            <if test="optionContent != null and optionContent != ''">
++                option_content = #{optionContent},
++            </if>
++            <if test="isCorrect != null">
++                is_correct = #{isCorrect},
++            </if>
++            <if test="createdBy != null and createdBy != ''">
++                created_by = #{createdBy},
++            </if>
++            <if test="createdTime != null">
++                created_time = #{createdTime},
++            </if>
++            <if test="updateBy != null and updateBy != ''">
++                update_by = #{updateBy},
++            </if>
++            <if test="updateTime != null">
++                update_time = #{updateTime},
++            </if>
++            <if test="isDeleted != null">
++                is_deleted = #{isDeleted},
++            </if>
++        </set>
++        where id = #{id}
++    </update>
++
++    <!--通过主键删除-->
++    <delete id="deleteById">
++        delete from subject_multiple where id = #{id}
++    </delete>
++
++</mapper>
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMultiple.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMultiple.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMultiple.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMultiple.java	
+@@ -0,0 +1,60 @@
++package edu.cugb.subject.infra.basic.entity;
++
++import lombok.Data;
++
++import java.util.Date;
++import java.io.Serializable;
++
++/**
++ * 多选题信息表(SubjectMultiple)实体类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:02
++ */
++@Data
++public class SubjectMultiple implements Serializable {
++    private static final long serialVersionUID = 173117725625689691L;
++/**
++     * 主键
++     */
++    private Long id;
++/**
++     * 题目id
++     */
++    private Long subjectId;
++/**
++     * 选项类型
++     */
++    private Long optionType;
++/**
++     * 选项内容
++     */
++    private String optionContent;
++/**
++     * 是否正确
++     */
++    private Integer isCorrect;
++/**
++     * 创建人
++     */
++    private String createdBy;
++/**
++     * 创建时间
++     */
++    private Date createdTime;
++/**
++     * 更新人
++     */
++    private String updateBy;
++/**
++     * 更新时间
++     */
++    private Date updateTime;
++
++    private Integer isDeleted;
++
++
++
++
++}
++
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java	
+@@ -0,0 +1,75 @@
++package edu.cugb.subject.infra.basic.service.impl;
++
++import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
++import edu.cugb.subject.infra.basic.mapper.SubjectMultipleDao;
++import edu.cugb.subject.infra.basic.service.SubjectMultipleService;
++import org.springframework.stereotype.Service;
++
++
++import javax.annotation.Resource;
++import java.util.List;
++
++/**
++ * 多选题信息表(SubjectMultiple)表服务实现类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:02
++ */
++@Service("subjectMultipleService")
++public class SubjectMultipleServiceImpl implements SubjectMultipleService {
++    @Resource
++    private SubjectMultipleDao subjectMultipleDao;
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    @Override
++    public SubjectMultiple queryById(Long id) {
++        return this.subjectMultipleDao.queryById(id);
++    }
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectMultiple insert(SubjectMultiple subjectMultiple) {
++        this.subjectMultipleDao.insert(subjectMultiple);
++        return subjectMultiple;
++    }
++
++    @Override
++    public void batchInsert(List<SubjectMultiple> subjectMultipleList) {
++        this.subjectMultipleDao.insertBatch(subjectMultipleList);
++    }
++
++    /**
++     * 修改数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectMultiple update(SubjectMultiple subjectMultiple) {
++        this.subjectMultipleDao.update(subjectMultiple);
++        return this.queryById(subjectMultiple.getId());
++    }
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    @Override
++    public boolean deleteById(Long id) {
++        return this.subjectMultipleDao.deleteById(id) > 0;
++    }
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java	
+@@ -0,0 +1,57 @@
++package edu.cugb.subject.infra.basic.service;
++
++import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
++
++import java.util.List;
++
++
++/**
++ * 多选题信息表(SubjectMultiple)表服务接口
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:02
++ */
++public interface SubjectMultipleService {
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    SubjectMultiple queryById(Long id);
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 实例对象
++     */
++    SubjectMultiple insert(SubjectMultiple subjectMultiple);
++
++    /**
++     * 批量插入多选题
++     * @param subjectMultipleList
++     */
++    void batchInsert(List<SubjectMultiple> subjectMultipleList);
++
++    /**
++     * 修改数据
++     *
++     * @param subjectMultiple 实例对象
++     * @return 实例对象
++     */
++    SubjectMultiple update(SubjectMultiple subjectMultiple);
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    boolean deleteById(Long id);
++
++
++}
+Index: club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java	
+@@ -0,0 +1,88 @@
++package edu.cugb.subject.infra.basic.service.impl;
++
++import edu.cugb.subject.infra.basic.entity.SubjectRadio;
++import edu.cugb.subject.infra.basic.mapper.SubjectRadioDao;
++import edu.cugb.subject.infra.basic.service.SubjectInfoService;
++import edu.cugb.subject.infra.basic.service.SubjectRadioService;
++import org.apache.ibatis.mapping.BoundSql;
++import org.apache.ibatis.mapping.MappedStatement;
++import org.apache.ibatis.session.Configuration;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.mybatis.spring.SqlSessionTemplate;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
++
++
++import javax.annotation.Resource;
++import java.util.List;
++
++/**
++ * 单选题信息表(SubjectRadio)表服务实现类
++ *
++ * @author makejava
++ * @since 2024-10-25 15:44:19
++ */
++@Service("subjectRadioService")
++public class SubjectRadioServiceImpl implements SubjectRadioService {
++    @Resource
++    private SubjectRadioDao subjectRadioDao;
++
++    @Autowired
++    private SqlSessionTemplate sqlSessionTemplate;
++
++    private static final Logger logger = LoggerFactory.getLogger(SubjectInfoService.class);
++
++    /**
++     * 通过ID查询单条数据
++     *
++     * @param id 主键
++     * @return 实例对象
++     */
++    @Override
++    public SubjectRadio queryById(Long id) {
++        return this.subjectRadioDao.queryById(id);
++    }
++
++
++
++    /**
++     * 新增数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectRadio insert(SubjectRadio subjectRadio) {
++        this.subjectRadioDao.insert(subjectRadio);
++        return subjectRadio;
++    }
++
++    @Override
++    public void batchInsert(List<SubjectRadio> subjectRadioList) {
++        this.subjectRadioDao.insertBatch(subjectRadioList);
++    }
++
++    /**
++     * 修改数据
++     *
++     * @param subjectRadio 实例对象
++     * @return 实例对象
++     */
++    @Override
++    public SubjectRadio update(SubjectRadio subjectRadio) {
++        this.subjectRadioDao.update(subjectRadio);
++        return this.queryById(subjectRadio.getId());
++    }
++
++    /**
++     * 通过主键删除数据
++     *
++     * @param id 主键
++     * @return 是否成功
++     */
++    @Override
++    public boolean deleteById(Long id) {
++        return this.subjectRadioDao.deleteById(id) > 0;
++    }
++}
