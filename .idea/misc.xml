@@ -5,16 +5,14 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/club-subject/pom.xml" />
+        <option value="$PROJECT_DIR$/club-oss/pom.xml" />
+        <option value="$PROJECT_DIR$/club-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/club-gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/club-subject/club-application/club-application-club/pom.xml" />
-        <option value="$PROJECT_DIR$/club-subject/club-application/club-application-contoller/pom.xml" />
-        <option value="$PROJECT_DIR$/club-subject/club-subject-application/pom.xml" />
-        <option value="$PROJECT_DIR$/club-subject/club-subject-common/pom.xml" />
-        <option value="$PROJECT_DIR$/club-subject/club-subject-domain/pom.xml" />
-        <option value="$PROJECT_DIR$/club-subject/club-subject-infra/pom.xml" />
+        <option value="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-job/pom.xml" />
       </set>
     </option>
   </component>

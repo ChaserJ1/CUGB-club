@@ -1,6 +1,7 @@
 
 package edu.cugb.subject.domain.entity;
 
+import edu.cugb.subject.common.entity.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2024-10-25 15:42:11
  */
 @Data
-public class SubjectInfoBO implements Serializable {
+public class SubjectInfoBO extends PageInfo implements Serializable {
     private static final long serialVersionUID = -71684389794293822L;
     /**
      * 主键
@@ -48,17 +49,31 @@ public class SubjectInfoBO implements Serializable {
      */
     private String subjectAnswer;
     /**
-     * 分类id
+     * 分类id列表
      */
     private List<Integer> categoryIds;
     /**
-     * 标签id
+     * 标签id列表
      */
     private List<Integer> labelIds;
+    /**
+     * 标签id名称列表
+     */
+    private List<String> labelNameList;
     /**
      * 答案选项
      */
     private List<SubjectAnswerBO> optionList;
+
+    /**
+     * 分类id
+     */
+    private Long categoryId;
+
+    /**
+     * 标签id
+     */
+    private Long labelId;
 
 
 }

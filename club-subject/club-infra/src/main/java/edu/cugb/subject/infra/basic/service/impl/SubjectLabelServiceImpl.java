@@ -65,8 +65,25 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
         return this.subjectLabelDao.deleteById(id) > 0;
     }
 
+    /**
+     * 批量查询数据
+     *
+     * @param labelIdList
+     * @return
+     */
     @Override
     public List<SubjectLabel> batchQueryById(List<Long> labelIdList) {
         return this.subjectLabelDao.batchQueryById(labelIdList);
+    }
+
+    /**
+     * 根据条件查询数据
+     *
+     * @param subjectLabel
+     * @return
+     */
+    @Override
+    public List<SubjectLabel> queryByCondition(SubjectLabel subjectLabel) {
+        return this.subjectLabelDao.queryByCondition(subjectLabel);
     }
 }

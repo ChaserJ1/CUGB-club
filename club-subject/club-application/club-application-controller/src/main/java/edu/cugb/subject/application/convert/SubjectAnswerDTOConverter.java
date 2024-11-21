@@ -23,4 +23,5 @@ public interface SubjectAnswerDTOConverter {
     List<SubjectAnswerBO> convertDTOListToBOList(List<SubjectAnswerDTO> dtoList);
 
 
+    List<SubjectAnswerBO> convertListDTOToBO(List<SubjectAnswerDTO> optionList);
 }

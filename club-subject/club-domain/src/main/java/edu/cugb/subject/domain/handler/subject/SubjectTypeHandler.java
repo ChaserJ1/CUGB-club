@@ -2,6 +2,7 @@ package edu.cugb.subject.domain.handler.subject;
 
 import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
+import edu.cugb.subject.domain.entity.SubjectOptionBO;
 import edu.cugb.subject.infra.basic.entity.SubjectInfo;
 import org.springframework.stereotype.Component;
 
@@ -26,4 +27,13 @@ public interface SubjectTypeHandler {
      * @param subjectInfoBO
      */
     void add(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 查询题目答案
+     *
+     * @param subjectId
+     */
+    SubjectOptionBO query(int subjectId);
+
+
 }

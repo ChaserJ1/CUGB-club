@@ -1,5 +1,6 @@
 package edu.cugb.subject.domain.service;
 
+import edu.cugb.subject.common.entity.PageResult;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
 import edu.cugb.subject.domain.entity.SubjectLabelBO;
 
@@ -19,5 +20,19 @@ public interface SubjectInfoDomainService {
      */
     void add(SubjectInfoBO subjectInfoBO);
 
+    /**
+     * 分页查询题目
+     *
+     * @param subjectInfoBO
+     * @return
+     */
+    PageResult<SubjectInfoBO> getSubjectPage(SubjectInfoBO subjectInfoBO);
 
+    /**
+     * 查询题目信息
+     *
+     * @param subjectInfoBO
+     * @return
+     */
+    SubjectInfoBO getSubjectInfo(SubjectInfoBO subjectInfoBO);
 }

@@ -30,7 +30,7 @@
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="SubjectLabelMap">
+    <select id="queryByCondition" resultMap="SubjectLabelMap">
         select
         id,
         label_name,
@@ -52,7 +52,7 @@
             <if test="sortNum != null">
                 and sort_num = #{sortNum}
             </if>
-            <if test="categoryId != null and categoryId != ''">
+            <if test="categoryId != null">
                 and category_id = #{categoryId}
             </if>
             <if test="createdBy != null and createdBy != ''">
@@ -71,7 +71,6 @@
                 and is_deleted = #{isDeleted}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
@@ -172,7 +171,7 @@
             <if test="sortNum != null">
                 sort_num = #{sortNum},
             </if>
-            <if test="categoryId != null and categoryId != ''">
+            <if test="categoryId != null">
                 category_id = #{categoryId},
             </if>
             <if test="createdBy != null and createdBy != ''">

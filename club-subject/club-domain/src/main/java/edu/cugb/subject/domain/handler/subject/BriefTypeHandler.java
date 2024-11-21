@@ -5,15 +5,12 @@ import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
 import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
 import edu.cugb.subject.domain.convert.SubjectTypeConverter;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
+import edu.cugb.subject.domain.entity.SubjectOptionBO;
 import edu.cugb.subject.infra.basic.entity.SubjectBrief;
-import edu.cugb.subject.infra.basic.entity.SubjectJudge;
 import edu.cugb.subject.infra.basic.service.SubjectBriefService;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @Author pengjia
@@ -34,15 +31,22 @@ public class BriefTypeHandler implements SubjectTypeHandler {
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
         //简答题插入
-        List<SubjectBrief> subjectBriefList = new LinkedList<>();
-        Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
-                "选项不能为空");
-        subjectInfoBO.getOptionList().forEach(option -> {
-            SubjectBrief subjectBrief = SubjectTypeConverter.INSTANCE.convertAnswerBOToBrief(option);
-            subjectBrief.setSubjectId(subjectInfoBO.getId());
-            subjectBrief.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-            subjectBriefList.add(subjectBrief);
-        });
-        subjectBriefService.batchInsert(subjectBriefList);
+        SubjectBrief subjectBrief = SubjectTypeConverter.INSTANCE.convertBOToBrief(subjectInfoBO);
+        Preconditions.checkNotNull(subjectInfoBO.getSubjectAnswer(), "简答题答案不能为空");
+        Preconditions.checkNotNull(subjectInfoBO.getSubjectParse(), "简答题解析不能为空");
+        subjectBrief.setSubjectId(subjectInfoBO.getId());
+        subjectBrief.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
+        subjectBriefService.insert(subjectBrief);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectBrief subjectBrief = new SubjectBrief();
+        subjectBrief.setSubjectId((long) subjectId);
+        SubjectBrief result = subjectBriefService.queryByCondition(subjectBrief);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setSubjectAnswer(result.getSubjectAnswer());
+        return subjectOptionBO;
+
     }
 }

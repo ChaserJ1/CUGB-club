@@ -84,4 +84,15 @@ public class SubjectRadioServiceImpl implements SubjectRadioService {
     public boolean deleteById(Long id) {
         return this.subjectRadioDao.deleteById(id) > 0;
     }
+
+    /**
+     * 通过实体作为筛选条件查询单选题目详情
+     *
+     * @param subjectRadio
+     * @return
+     */
+    @Override
+    public List<SubjectRadio> queryByCondition(SubjectRadio subjectRadio) {
+        return this.subjectRadioDao.queryAllByLimit(subjectRadio);
+    }
 }

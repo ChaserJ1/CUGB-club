@@ -4,7 +4,10 @@ import com.google.common.base.Preconditions;
 import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
 import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
 import edu.cugb.subject.domain.convert.SubjectTypeConverter;
+import edu.cugb.subject.domain.entity.SubjectAnswerBO;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
+import edu.cugb.subject.domain.entity.SubjectOptionBO;
+import edu.cugb.subject.infra.basic.entity.SubjectBrief;
 import edu.cugb.subject.infra.basic.entity.SubjectJudge;
 import edu.cugb.subject.infra.basic.entity.SubjectRadio;
 import edu.cugb.subject.infra.basic.service.SubjectJudgeService;
@@ -34,16 +37,30 @@ public class JudgeTypeHandler implements SubjectTypeHandler {
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
         //判断题插入
-        List<SubjectJudge> subjectJudgeList = new LinkedList<>();
+        SubjectJudge subjectJudge = new SubjectJudge();
         Preconditions.checkArgument(!CollectionUtils.isEmpty(subjectInfoBO.getOptionList()),
-                "选项不能为空");
-        subjectInfoBO.getOptionList().forEach(option -> {
-            SubjectJudge subjectJudge = SubjectTypeConverter.INSTANCE.convertAnswerBOToJudge(option);
-            subjectJudge.setSubjectId(subjectInfoBO.getId());
-            subjectJudge.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-            subjectJudgeList.add(subjectJudge);
-        });
-        subjectJudgeService.batchInsert(subjectJudgeList);
+                "isCorrect不能为空");
+        //从列表中获取第一个元素
+        SubjectAnswerBO subjectAnswerBO = subjectInfoBO.getOptionList().get(0);
+        subjectJudge.setSubjectId(subjectInfoBO.getId());
+        subjectJudge.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
+        subjectJudge.setIsCorrect(subjectAnswerBO.getIsCorrect());
+        subjectJudgeService.insert(subjectJudge);
     }
+
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectJudge subjectJudge = new SubjectJudge();
+        subjectJudge.setSubjectId((long) subjectId);
+        List<SubjectJudge> result = subjectJudgeService.queryByCondition(subjectJudge);
+        List<SubjectAnswerBO> subjectAnswerBOList = SubjectTypeConverter.INSTANCE
+                .convertJudgeListToAnswerBO(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
+    }
+
+
 }
 
