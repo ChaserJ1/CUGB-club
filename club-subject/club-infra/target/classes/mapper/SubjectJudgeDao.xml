@@ -65,7 +65,6 @@
                 and is_deleted = #{isDeleted}
             </if>
         </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
@@ -109,17 +108,17 @@
                                   update_by,
                                   update_time,
                                   is_deleted)
-        values (#{subjectId},#{isCorrect},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
+        values (#{subjectId}, #{isCorrect}, #{createdBy}, #{createdTime}, #{updateBy}, #{updateTime}, #{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
         insert into subject_judge(subject_id,
-                                  is_correct,
-                                  created_by,
-                                  created_time,
-                                  update_by,
-                                  update_time,
-                                  is_deleted)
+        is_correct,
+        created_by,
+        created_time,
+        update_by,
+        update_time,
+        is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.subjectId},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
@@ -176,7 +175,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from subject_judge where id = #{id}
+        delete
+        from subject_judge
+        where id = #{id}
     </delete>
 
 </mapper>

@@ -1,0 +1,7 @@
+server:
+  port: 4000
+minio:
+  url: http://8.152.209.169:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+

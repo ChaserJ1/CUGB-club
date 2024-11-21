@@ -53,4 +53,6 @@ public interface SubjectMappingService {
      * @return
      */
     List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
+
+    void batchInsert(List<SubjectMapping> mappingList);
 }

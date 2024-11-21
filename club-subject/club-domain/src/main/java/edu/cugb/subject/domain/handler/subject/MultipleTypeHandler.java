@@ -4,7 +4,10 @@ import com.google.common.base.Preconditions;
 import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
 import edu.cugb.subject.common.enums.SubjectInfoTypeEnum;
 import edu.cugb.subject.domain.convert.SubjectTypeConverter;
+import edu.cugb.subject.domain.entity.SubjectAnswerBO;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
+import edu.cugb.subject.domain.entity.SubjectOptionBO;
+import edu.cugb.subject.infra.basic.entity.SubjectJudge;
 import edu.cugb.subject.infra.basic.entity.SubjectMultiple;
 import edu.cugb.subject.infra.basic.service.SubjectMultipleService;
 import org.springframework.stereotype.Component;
@@ -42,5 +45,17 @@ public class MultipleTypeHandler implements SubjectTypeHandler {
             subjectMultipleList.add(subjectMultiple);
         });
         subjectMultipleService.batchInsert(subjectMultipleList);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectMultiple subjectMultiple = new SubjectMultiple();
+        subjectMultiple.setSubjectId((long) subjectId);
+        List<SubjectMultiple> result = subjectMultipleService.queryByCondition(subjectMultiple);
+        List<SubjectAnswerBO> subjectAnswerBOList = SubjectTypeConverter.INSTANCE
+                .convertMultipleListToAnswerBO(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
     }
 }

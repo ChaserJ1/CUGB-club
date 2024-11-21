@@ -1,5 +1,9 @@
 package edu.cugb.subject.common.entity;
 
+import lombok.Data;
+import lombok.Getter;
+
+import java.io.Serializable;
 import java.net.Inet4Address;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +13,8 @@ import java.util.List;
  * @Data 2024/10/28 16:21
  * @Description: 分页返回的实体
  */
-public class PageResult<T> {
+@Data
+public class PageResult<T> implements Serializable {
     /**
      * 当前页
      */
@@ -74,11 +79,11 @@ public class PageResult<T> {
         this.end = (this.start - 1 + this.pageSize * (this.pageNo > 0 ? 1 : 0));
     }
 
-    private void setPageSize(Integer pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    private void setPageNo(Integer pageNo) {
+    public void setPageNo(Integer pageNo) {
         this.pageNo = pageNo;
     }
 

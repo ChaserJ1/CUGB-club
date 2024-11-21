@@ -1,6 +1,7 @@
 package edu.cugb.subject.application.convert;
 
 import edu.cugb.subject.application.dto.SubjectInfoDTO;
+import edu.cugb.subject.common.entity.PageResult;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -17,4 +18,5 @@ public interface SubjectInfoDTOConverter {
     SubjectInfoBO convertDTOToBO(SubjectInfoDTO subjectInfoDTO);
 
 
+    SubjectInfoDTO convertBOToDTO(SubjectInfoBO result);
 }

@@ -1,6 +1,7 @@
 package edu.cugb.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import edu.cugb.subject.common.enums.CategoryTypeEnum;
 import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
 import edu.cugb.subject.domain.convert.SubjectCategoryConverter;
 import edu.cugb.subject.domain.convert.SubjectLabelConverter;
@@ -10,6 +11,7 @@ import edu.cugb.subject.domain.service.SubjectLabelDomainService;
 import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 import edu.cugb.subject.infra.basic.entity.SubjectLabel;
 import edu.cugb.subject.infra.basic.entity.SubjectMapping;
+import edu.cugb.subject.infra.basic.service.SubjectCategoryService;
 import edu.cugb.subject.infra.basic.service.SubjectLabelService;
 import edu.cugb.subject.infra.basic.service.SubjectMappingService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +37,8 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
     private SubjectLabelService subjectLabelService;
     @Resource
     private SubjectMappingService subjectMappingService;
+    @Resource
+    private SubjectCategoryService subjectCategoryService;
 
 
     /**
@@ -79,6 +83,15 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
 
     @Override
     public List<SubjectLabelBO> queryByCategoryId(SubjectLabelBO subjectLabelBO) {
+        //如果当前分类是1级分类，则查询所有标签
+        SubjectCategory subjectCategory = subjectCategoryService.queryById(subjectLabelBO.getCategoryId());
+        if (CategoryTypeEnum.PRIMARY.getCode() == subjectCategory.getCategoryType()) {
+            SubjectLabel subjectLabel = new SubjectLabel();
+            subjectLabel.setCategoryId(subjectLabelBO.getCategoryId());
+            List<SubjectLabel> labelList = subjectLabelService.queryByCondition(subjectLabel);
+            List<SubjectLabelBO> labelResultList = SubjectLabelConverter.INSTANCE.convertLabelListToBOList(labelList);
+            return labelResultList;
+        }
         Long categoryId = subjectLabelBO.getCategoryId();
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());

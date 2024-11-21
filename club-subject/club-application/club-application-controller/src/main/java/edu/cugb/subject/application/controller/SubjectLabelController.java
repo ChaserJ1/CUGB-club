@@ -124,7 +124,7 @@ public class SubjectLabelController {
 
         } catch (Exception e) {
             log.error("SubjectLabelController.queryByCategoryId.error:{}", e.getMessage(), e);
-            return Result.fail("查询分类下失败");
+            return Result.fail("查询分类下标签失败");
         }
     }
 

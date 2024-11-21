@@ -4,51 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="新增题目以及分页">
-      <change afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectAnswerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-common/src/main/java/edu/cugb/subject/common/enums/SubjectInfoTypeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectAnswerBO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectHandlerFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectBrief.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectJudge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectMultiple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectRadio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectJudgeDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectMultipleDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectRadioDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml" afterDir="false" />
+    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="鉴权模块骨架">
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/java/edu/cugb/auth/AuthApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/log4j2-spring.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-infra/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +64,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="1.8" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -115,6 +86,7 @@
     "Maven.club-starter [clean].executor": "Run",
     "Maven.club-starter [compile].executor": "Run",
     "Maven.club-starter [install].executor": "Run",
+    "Maven.club-subject [clean].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -122,19 +94,23 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.OssApplication.executor": "Run",
     "Spring Boot.SubjectApplication.executor": "Run",
+    "git-widget-placeholder": "day01",
+    "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java_Project/jc-club/club",
+    "last_opened_file_path": "D:/Java_Project/jc-club/club/club-auth/club-auth-starter/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.35747126",
-    "settings.editor.selected.configurable": "com.sjhy.plugin.ui.TemplateSettingForm",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -144,24 +120,57 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-starter\src\main\resources" />
+      <recent name="D:\Java_Project\jc-club\club\club-oss\src\main\resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Java_Project\jc-club\club\club-subject\club-infra\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.cugb.auth" />
+      <recent name="edu.cugb.oss" />
+      <recent name="edu.cugb.subject.domain.entity" />
       <recent name="edu.cugb.subject.domain.convert" />
       <recent name="edu.cugb.subject.domain.handler.subject" />
-      <recent name="edu.cugb.subject.common.enums" />
-      <recent name="edu.cugb.subject.domain.service.impl" />
-      <recent name="edu.cugb.subject.domain.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SubjectApplication">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AuthApplication">
     <configuration name="DruidEncryptUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.cugb.subject.infra.basic.utils.DruidEncryptUtil" />
       <module name="club-infra" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.cugb.subject.infra.basic.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="club-auth-starter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.auth.AuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OssApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="club-oss" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.oss.OssApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.cugb.oss.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -185,7 +194,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.SubjectApplication" />
-        <item itemvalue="Application.DruidEncryptUtil" />
+        <item itemvalue="Spring Boot.OssApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -223,6 +232,28 @@
       <workItem from="1729771169999" duration="26725000" />
       <workItem from="1730026151685" duration="7699000" />
       <workItem from="1730100131794" duration="6831000" />
+      <workItem from="1730108954418" duration="177000" />
+      <workItem from="1730109140363" duration="132000" />
+      <workItem from="1730109280788" duration="851000" />
+      <workItem from="1730110146319" duration="4000" />
+      <workItem from="1730205129079" duration="6503000" />
+      <workItem from="1730268660998" duration="22494000" />
+      <workItem from="1730634344436" duration="869000" />
+      <workItem from="1730726671966" duration="4294000" />
+      <workItem from="1730857663697" duration="5500000" />
+      <workItem from="1730947376888" duration="584000" />
+      <workItem from="1730963487637" duration="597000" />
+      <workItem from="1730986566489" duration="1695000" />
+      <workItem from="1731053031426" duration="46000" />
+      <workItem from="1731243973962" duration="11451000" />
+      <workItem from="1731390599183" duration="1015000" />
+      <workItem from="1731555341867" duration="3000" />
+      <workItem from="1731559562235" duration="4000" />
+      <workItem from="1731847478344" duration="1204000" />
+      <workItem from="1731935000840" duration="3319000" />
+      <workItem from="1731999654516" duration="4706000" />
+      <workItem from="1732087178884" duration="5793000" />
+      <workItem from="1732158828414" duration="631000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -296,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730106846209</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="鉴权模块骨架">
+      <option name="closed" value="true" />
+      <created>1732158089445</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732158089445</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,10 +398,11 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="分类模块开发" />
     <MESSAGE value="题目标签开发" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/day01' into day01" />
     <MESSAGE value="标签模块" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/day01' into day01" />
     <MESSAGE value="新增题目以及分页" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增题目以及分页" />
+    <MESSAGE value="鉴权模块骨架" />
+    <option name="LAST_COMMIT_MESSAGE" value="鉴权模块骨架" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -28,8 +28,8 @@
                subject_parse,
                created_by,
                created_time,
-               update_byup,
-               date_time,
+               update_by,
+               update_time,
                is_deleted
         from subject_info
         where id = #{id}
@@ -47,8 +47,8 @@
         subject_parse,
         created_by,
         created_time,
-        update_byup,
-        date_time,
+        update_by,
+        update_time,
         is_deleted
         from subject_info
         <where>
@@ -135,9 +135,55 @@
             </if>
         </where>
     </select>
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(1)
+        from subject_info si
+        LEFT JOIN subject_mapping sm ON si.id = sm.subject_id
+        where sm.category_id = #{categoryId}
+        and sm.label_id = #{labelId}
+        and si.is_deleted = 0
+        and sm.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and si.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and si.subject_type = #{subjectInfo.subjectType}
+        </if>
+    </select>
+    <select id="queryPage" resultMap="SubjectInfoMap">
+        select
+        si.id,
+        si.subject_name,
+        si.subject_difficult,
+        si.settle_name,
+        si.subject_type,
+        si.subject_score,
+        si.subject_parse,
+        si.created_by,
+        si.created_time,
+        si.update_by,
+        si.update_time,
+        si.is_deleted
+        from subject_info si
+        LEFT JOIN subject_mapping sm ON si.id = sm.subject_id
+        where sm.category_id = #{categoryId}
+        and sm.label_id = #{labelId}
+        and si.is_deleted = 0
+        and sm.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and si.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and si.subject_type = #{subjectInfo.subjectType}
+        </if>
+        limit #{start}, #{pageSize}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
         insert into subject_info(subject_name, subject_difficult, settle_name, subject_type, subject_score,
                                  subject_parse, created_by, created_time, update_by, update_time, is_deleted)
         values (#{subjectName}, #{subjectDifficult}, #{settleName}, #{subjectType}, #{subjectScore}, #{subjectParse},

@@ -54,4 +54,5 @@ public interface SubjectJudgeService {
     boolean deleteById(Long id);
 
 
+    List<SubjectJudge> queryByCondition(SubjectJudge subjectJudge);
 }
