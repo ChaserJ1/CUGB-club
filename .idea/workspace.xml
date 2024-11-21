@@ -4,19 +4,164 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="鉴权模块骨架">
-      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/java/edu/cugb/auth/AuthApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/log4j2-spring.xml" afterDir="false" />
+    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="新增题目以及分页">
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-mq/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/OssApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/AliStorageAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/MinioStorageAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/StorageAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/config/MinioConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/config/StorageConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/controller/FileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/entity/FileInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/service/FileService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/util/MinioUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/config/GlobalCConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectOptionBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/config/MybatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/config/MybatisPlusAllSqlLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/config/SqlStatementInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_19_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_4_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_jul_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_slf4j_impl_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_41.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_41.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_4_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_4_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_5_12_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_log4j2_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_27.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_10_28_17_15_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_10_28_17_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_10_28_17_15__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_10_28_17_15__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_10_24_12_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_10_24_12_41__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_10_25_15_40_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_10_25_15_40__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-infra/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-subject/club-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectLabelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectAnswerDTOConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectInfoDTOConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectInfoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectAnswerDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectAnswerDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectCategoryDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectCategoryDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectInfoDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectInfoDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-common/src/main/java/edu/cugb/subject/common/entity/PageResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectInfoConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectLabelConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectLabelConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/convert/SubjectTypeConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectInfoBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/BriefTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/JudgeTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/MultipleTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/RadioTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/handler/subject/SubjectTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectInfoDomainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectInfoDomainServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectLabelDomainServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectLabelDomainServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectCategoryConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectCategoryConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectInfoConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectInfoConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectTypeConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectTypeConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectBriefDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectLabelDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectLabelDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectBriefService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectJudgeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectLabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectLabelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMappingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectMultipleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectRadioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectBriefServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectJudgeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectLabelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectLabelServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMappingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectMultipleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectRadioServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectBriefDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectInfoDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectJudgeDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectLabelDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectLabelDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectMultipleDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectRadioDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectBriefDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectBriefDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectInfoDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectInfoDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectJudgeDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectJudgeDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectLabelDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectLabelDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectMappingDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectMultipleDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectMultipleDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectRadioDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectRadioDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +245,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java_Project/jc-club/club/club-auth/club-auth-starter/src/main/resources",
+    "last_opened_file_path": "D:/Java_Project/jc-club/club/club-oss/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,7 +254,6 @@
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.35747126",
-    "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
     "vue.rearranger.settings.migration": "true"
   },
@@ -121,30 +265,20 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-starter\src\main\resources" />
       <recent name="D:\Java_Project\jc-club\club\club-oss\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Java_Project\jc-club\club\club-subject\club-infra\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="edu.cugb.auth" />
       <recent name="edu.cugb.oss" />
       <recent name="edu.cugb.subject.domain.entity" />
       <recent name="edu.cugb.subject.domain.convert" />
       <recent name="edu.cugb.subject.domain.handler.subject" />
+      <recent name="edu.cugb.subject.common.enums" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="MicronautRunConfigurationType" />
-        <option value="QuarkusRunConfigurationType" />
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.AuthApplication">
+  <component name="RunManager" selected="Spring Boot.SubjectApplication">
     <configuration name="DruidEncryptUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.cugb.subject.infra.basic.utils.DruidEncryptUtil" />
       <module name="club-infra" />
@@ -154,13 +288,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="club-auth-starter" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.auth.AuthApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -252,8 +379,7 @@
       <workItem from="1731847478344" duration="1204000" />
       <workItem from="1731935000840" duration="3319000" />
       <workItem from="1731999654516" duration="4706000" />
-      <workItem from="1732087178884" duration="5793000" />
-      <workItem from="1732158828414" duration="631000" />
+      <workItem from="1732087178884" duration="4873000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -327,15 +453,7 @@
       <option name="project" value="LOCAL" />
       <updated>1730106846209</updated>
     </task>
-    <task id="LOCAL-00010" summary="鉴权模块骨架">
-      <option name="closed" value="true" />
-      <created>1732158089445</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1732158089445</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,11 +516,10 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="分类模块开发" />
     <MESSAGE value="题目标签开发" />
-    <MESSAGE value="标签模块" />
     <MESSAGE value="Merge remote-tracking branch 'origin/day01' into day01" />
+    <MESSAGE value="标签模块" />
     <MESSAGE value="新增题目以及分页" />
-    <MESSAGE value="鉴权模块骨架" />
-    <option name="LAST_COMMIT_MESSAGE" value="鉴权模块骨架" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增题目以及分页" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
