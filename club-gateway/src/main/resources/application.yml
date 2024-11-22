@@ -1,0 +1,13 @@
+server:
+  port: 5000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: oss # 路由的唯一标识符
+          uri: lb://club-oss # 指定路由的目标 URI。lb:// 前缀表示应使用负载均衡器，club-oss 是服务 ID
+          predicates:
+            - Path=/oss/** #此断言匹配任何以 /oss/ 开头的请求路径
+          filters:
+            - StripPrefix=1 # 去掉请求路径中的第一个路径元素 如请求/oss/club-oss/getAllBuckets，去掉后为/oss/getAllBuckets
+
