@@ -33,7 +33,7 @@ logging:
 
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK6asWdwagGuu0mstNGTw8uDxWBGLDLAzmLdru1cLmjni5BOn0ohJjCcrcXGnt4Bo7FmwGCrEY/fwfGvMzz0eFUCAwEAAQ==
 
-#mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
 
