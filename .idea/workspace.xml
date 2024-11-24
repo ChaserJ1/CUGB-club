@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="auth服务注册到nacos">
-      <change afterPath="$PROJECT_DIR$/club-subject/club-starter/src/main/resources/bootstrap.yml" afterDir="false" />
+    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="subject服务注册到nacos">
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/SaTokenConfigure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/StpInterfaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +81,8 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.DruidEncryptUtil.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
+    "HTTP Request.generated-requests | #6.executor": "Run",
     "Maven.club-application-controller [install].executor": "Run",
     "Maven.club-starter [clean].executor": "Run",
     "Maven.club-starter [compile].executor": "Run",
@@ -137,19 +149,12 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SubjectApplication">
-    <configuration name="DruidEncryptUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.cugb.subject.infra.basic.utils.DruidEncryptUtil" />
-      <module name="club-infra" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.cugb.subject.infra.basic.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="6" requestIdentifier="#6" runType="Run single request">
+      <method v="2" />
     </configuration>
     <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="club-auth-starter" />
@@ -177,19 +182,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OssApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="club-oss" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.oss.OssApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.cugb.oss.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SubjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="club-starter" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.subject.SubjectApplication" />
@@ -203,12 +195,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="HTTP Request.generated-requests | #4" />
+      <item itemvalue="HTTP Request.generated-requests | #6" />
+      <item itemvalue="Spring Boot.AuthApplication" />
+      <item itemvalue="Spring Boot.GatewayApplication" />
+      <item itemvalue="Spring Boot.SubjectApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.SubjectApplication" />
-        <item itemvalue="Spring Boot.OssApplication" />
-        <item itemvalue="Spring Boot.AuthApplication" />
         <item itemvalue="Spring Boot.GatewayApplication" />
+        <item itemvalue="HTTP Request.generated-requests | #6" />
+        <item itemvalue="Spring Boot.AuthApplication" />
+        <item itemvalue="Spring Boot.SubjectApplication" />
+        <item itemvalue="HTTP Request.generated-requests | #4" />
       </list>
     </recent_temporary>
   </component>
@@ -268,7 +268,10 @@
       <workItem from="1731999654516" duration="4706000" />
       <workItem from="1732087178884" duration="4873000" />
       <workItem from="1732173874413" duration="524000" />
-      <workItem from="1732174420357" duration="12539000" />
+      <workItem from="1732174420357" duration="13545000" />
+      <workItem from="1732278566233" duration="979000" />
+      <workItem from="1732279567440" duration="4000" />
+      <workItem from="1732413135588" duration="10663000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -358,7 +361,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732277439186</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="subject服务注册到nacos">
+      <option name="closed" value="true" />
+      <created>1732277782262</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732277782262</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +438,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/day01' into day01&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;club-auth/club-auth-application/club-auth-application-controller/pom.xml&#10;#&#9;club-auth/club-auth-common/pom.xml&#10;#&#9;club-auth/club-auth-domain/pom.xml&#10;#&#9;club-auth/club-auth-infra/pom.xml&#10;#&#9;club-auth/club-auth-starter/pom.xml&#10;#&#9;club-auth/pom.xml&#10;#&#9;club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectInfoConverterImpl.java" />
     <MESSAGE value="oss服务注册到nacos" />
     <MESSAGE value="auth服务注册到nacos" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth服务注册到nacos" />
+    <MESSAGE value="subject服务注册到nacos" />
+    <option name="LAST_COMMIT_MESSAGE" value="subject服务注册到nacos" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
