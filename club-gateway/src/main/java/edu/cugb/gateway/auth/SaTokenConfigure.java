@@ -25,23 +25,17 @@ public class SaTokenConfigure {
                 // 鉴权方法：每次访问进入
                 .setAuth(obj -> {
                     System.out.println("-------- 前端访问path：" + SaHolder.getRequest().getRequestPath());
-                    // 登录校验 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-                    SaRouter.match("/**", "/user/doLogin", r -> StpUtil.checkLogin());
+                    // 登录校验 -- 拦截所有路由，并排除/auth/user/doLogin 用于开放登录
+                    SaRouter.match("/auth/**", "/auth/user/doLogin", r -> StpUtil.checkRole("admin"));
+                    SaRouter.match("/oss/**", r -> StpUtil.checkLogin());
+                    SaRouter.match("/subject/**", r -> StpUtil.checkLogin());
+                    SaRouter.match("/subject/subject/add", r -> StpUtil.checkPermission("subject:add"));
 
-                    // 权限认证 -- 不同模块, 校验不同权限
-                    //SaRouter.match("/user/**", r -> StpUtil.checkPermission("user"));
-                    SaRouter.match("/admin/**", r -> StpUtil.checkPermission("admin"));
-                    SaRouter.match("/goods/**", r -> StpUtil.checkPermission("goods"));
-                    SaRouter.match("/orders/**", r -> StpUtil.checkPermission("orders"));
 
                     //角色认证
                     //SaRouter.match("/user/**", r -> StpUtil.checkRole("user"));
 
                     // 更多匹配 ...  */
-                })
-                // 异常处理方法：每次setAuth函数出现异常时进入
-                .setError(e -> {
-                    return SaResult.error(e.getMessage());
                 })
                 ;
     }

@@ -4,28 +4,109 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="subject服务注册到nacos">
-      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/SaTokenConfigure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/StpInterfaceImpl.java" afterDir="false" />
+    <list default="true" id="0d6f3cf3-fd4a-4dc7-8a2a-2b7857099fb1" name="Changes" comment="最新版">
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/config/GlobalCConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/convert/AuthPermissionDTOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/convert/AuthRoleDTOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/convert/AuthRolePermissionDTOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/convert/AuthUserDTOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/dto/AuthPermissionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/dto/AuthRoleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/dto/AuthRolePermissionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/dto/AuthUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/entity/PageInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/entity/PageResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/entity/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/enums/AuthUserStatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/enums/IsDeletedFlagEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-common/src/main/java/edu/cugb/auth/common/enums/ResultCodeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/constants/AuthConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/convert/AuthPermissionBOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/convert/AuthRoleBOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/convert/AuthUserBOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/entity/AuthPermissionBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/entity/AuthRoleBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/entity/AuthRolePermissionBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/entity/AuthUserBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/redis/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/redis/RedisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/AuthPermissionDomainService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/AuthRoleDomainService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/AuthRolePermissionDomainService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/AuthUserDomainService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/impl/AuthPermissionDomainServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/impl/AuthRoleDomainServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/impl/AuthRolePermissionDomainServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/src/main/java/edu/cugb/auth/domain/service/impl/AuthUserDomainServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/entity/AuthPermission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/entity/AuthRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/entity/AuthRolePermission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/entity/AuthUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/entity/AuthUserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/mapper/AuthPermissionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/mapper/AuthRoleDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/mapper/AuthRolePermissionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/mapper/AuthUserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/mapper/AuthUserRoleDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/AuthPermissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/AuthRolePermissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/AuthRoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/AuthUserRoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/AuthUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/impl/AuthPermissionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/impl/AuthRolePermissionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/impl/AuthRoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/impl/AuthUserRoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/basic/service/impl/AuthUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/config/MybatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/config/MybatisPlusAllSqlLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/config/SqlStatementInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthPermissionDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthRoleDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthRolePermissionDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthUserDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthUserRoleDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/entity/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/enums/ResultCodeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/exception/GatewayExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/redis/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/redis/RedisUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-domain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/club-auth/club-auth-starter/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/club-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/SaTokenConfigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/SaTokenConfigure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/StpInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/src/main/java/edu/cugb/gateway/auth/StpInterfaceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/club-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/club-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/club-gateway/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectAnswerDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectAnswerDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectCategoryDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectCategoryDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectInfoDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectInfoDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/target/generated-sources/annotations/edu/cugb/subject/application/convert/SubjectLabelDTOConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectCategoryConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectCategoryConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectInfoConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectInfoConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectLabelConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectTypeConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/target/generated-sources/annotations/edu/cugb/subject/domain/convert/SubjectTypeConverterImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="mapper" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -96,24 +177,25 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.AuthApplication.executor": "Run",
-    "Spring Boot.GatewayApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Debug",
     "Spring Boot.OssApplication.executor": "Run",
     "Spring Boot.SubjectApplication.executor": "Run",
+    "extract.method.default.visibility": "private",
     "git-widget-placeholder": "day01",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java_Project/jc-club/club/club-subject/club-starter/src/main/resources",
+    "last_opened_file_path": "D:/Java_Project/jc-club/club/club-auth/club-auth-infra/src/main/java/edu/cugb/auth/infra/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.35747126",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -122,22 +204,30 @@
     ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Java_Project\jc-club\club\club-subject\club-starter\src\main\resources" />
-      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-starter\src\main\resources" />
-      <recent name="D:\Java_Project\jc-club\club\club-gateway\src\main\resources" />
-      <recent name="D:\Java_Project\jc-club\club\club-oss\src\main\resources" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-infra\src\main\java\edu\cugb\auth\infra\config" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-application\club-auth-application-controller\src\main\java\edu\cugb\auth\application\convert" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-domain\src\main\java\edu\cugb\auth\domain\convert" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-domain\src\main\java\edu\cugb\auth\domain\service\impl" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-domain\src\main\java\edu\cugb\auth\domain\service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-infra\src\main\java\edu\cugb\auth\infra\basic\service" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-infra\src\main\java\edu\cugb\auth\infra\basic\mapper" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-infra\src\main\java\edu\cugb\auth\infra\basic\entity" />
+      <recent name="D:\Java_Project\jc-club\club\club-auth\club-auth-infra\src\main\resources\mapper" />
       <recent name="D:\Java_Project\jc-club\club\club-subject\club-infra\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="edu.cugb.gateway" />
-      <recent name="edu.cugb.oss" />
-      <recent name="edu.cugb.subject.domain.entity" />
-      <recent name="edu.cugb.subject.domain.convert" />
-      <recent name="edu.cugb.subject.domain.handler.subject" />
+      <recent name="edu.cugb.auth.application.dto" />
+      <recent name="edu.cugb.auth.common.enums" />
+      <recent name="edu.cugb.auth.domain.constants" />
+      <recent name="edu.cugb.auth.application.config" />
+      <recent name="edu.cugb.auth.infra.basic.mapper" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -149,11 +239,11 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
-    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.AuthApplication">
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4">
       <method v="2" />
     </configuration>
-    <configuration name="generated-requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="6" requestIdentifier="#6" runType="Run single request">
+    <configuration name="generated-requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="6" requestIdentifier="#6">
       <method v="2" />
     </configuration>
     <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -204,11 +294,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.GatewayApplication" />
-        <item itemvalue="HTTP Request.generated-requests | #6" />
         <item itemvalue="Spring Boot.AuthApplication" />
         <item itemvalue="Spring Boot.SubjectApplication" />
-        <item itemvalue="HTTP Request.generated-requests | #4" />
+        <item itemvalue="Spring Boot.GatewayApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -271,7 +359,17 @@
       <workItem from="1732174420357" duration="13545000" />
       <workItem from="1732278566233" duration="979000" />
       <workItem from="1732279567440" duration="4000" />
-      <workItem from="1732413135588" duration="10663000" />
+      <workItem from="1732413135588" duration="12184000" />
+      <workItem from="1732446045194" duration="1774000" />
+      <workItem from="1732616140404" duration="6522000" />
+      <workItem from="1732706317365" duration="4779000" />
+      <workItem from="1732715504142" duration="1308000" />
+      <workItem from="1732770922913" duration="8971000" />
+      <workItem from="1732798391361" duration="6609000" />
+      <workItem from="1732861187871" duration="6659000" />
+      <workItem from="1732868377492" duration="164000" />
+      <workItem from="1732868561496" duration="54000" />
+      <workItem from="1732868639031" duration="982000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -369,7 +467,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732277782262</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="最新版">
+      <option name="closed" value="true" />
+      <created>1732444766284</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732444766284</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +545,8 @@
     <MESSAGE value="oss服务注册到nacos" />
     <MESSAGE value="auth服务注册到nacos" />
     <MESSAGE value="subject服务注册到nacos" />
-    <option name="LAST_COMMIT_MESSAGE" value="subject服务注册到nacos" />
+    <MESSAGE value="最新版" />
+    <option name="LAST_COMMIT_MESSAGE" value="最新版" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
