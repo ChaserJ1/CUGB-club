@@ -21,15 +21,17 @@ public class AuthRolePermissionDomainServiceImpl implements AuthRolePermissionDo
 
     @Override
     public Boolean add(AuthRolePermissionBO authRolePermissionBO) {
-        List<AuthRolePermission> rolePermissionList = new LinkedList<>();
+        LinkedList<AuthRolePermission> rolePermissionList = new LinkedList<>();
         Long roleId = authRolePermissionBO.getRoleId();
-        authRolePermissionBO.getPermissionIdList().forEach(permissionId -> {
-            AuthRolePermission authRolePermission = new AuthRolePermission();
-            authRolePermission.setRoleId(roleId);
-            authRolePermission.setPermissionId(permissionId);
-            authRolePermission.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-            rolePermissionList.add(authRolePermission);
-        });
+        authRolePermissionBO.getPermissionIdList().forEach(permissionId ->
+                {
+                    AuthRolePermission authRolePermission = new AuthRolePermission();
+                    authRolePermission.setPermissionId(permissionId);
+                    authRolePermission.setRoleId(roleId);
+                    authRolePermission.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
+                    rolePermissionList.add(authRolePermission);
+                }
+        );
         int count = authRolePermissionService.batchInsert(rolePermissionList);
         return count > 0;
     }

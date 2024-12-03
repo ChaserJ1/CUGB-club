@@ -22,7 +22,7 @@ public class AuthRoleDomainServiceImpl implements AuthRoleDomainService {
     public Boolean add(AuthRoleBO authRoleBO) {
         AuthRole authRole = AuthRoleBOConverter.INSTANCE.convertBOToEntity(authRoleBO);
         authRole.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-        Integer count = authRoleService.insert(authRole);
+        int count = authRoleService.insert(authRole);
         return count > 0;
     }
 

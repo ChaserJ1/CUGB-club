@@ -4,10 +4,12 @@ import edu.cugb.auth.infra.basic.service.AuthUserService;
 import edu.cugb.auth.infra.basic.entity.AuthUser;
 import edu.cugb.auth.infra.basic.mapper.AuthUserDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 
 import javax.annotation.Resource;
 import java.util.List;
+
 
 /**
  * 用户信息表(AuthUser)表服务实现类

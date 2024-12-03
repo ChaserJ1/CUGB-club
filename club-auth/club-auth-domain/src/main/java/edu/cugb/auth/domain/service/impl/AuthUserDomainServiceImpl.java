@@ -18,10 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,14 +47,14 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthRoleService authRoleService;
 
-    private String salt = "chicken";
+    private String salt = "cugb";
 
     @Resource
     private RedisUtil redisUtil;
 
-    private String authPermissionPrefix = "auth.permission";
+    private final String authPermissionPrefix = "auth.permission";
 
-    private String authRolePrefix = "auth.role";
+    private final String authRolePrefix = "auth.role";
 
     private static final String LOGIN_PREFIX = "loginCode";
 
@@ -63,10 +65,30 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         //校验用户是否存在
         AuthUser exitsAuthUser = new AuthUser();
         exitsAuthUser.setUserName(authUserBO.getUserName());
+        List<AuthUser> existUser = authUserService.queryByCondition(exitsAuthUser);
+        //若用户存在，则直接返回，不做任何修改
+        if (!existUser.isEmpty()) {
+            return true;
+        }
+
+        //若用户不存在
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
+        authUser.setPassword(SaSecureUtil.md5BySalt(authUserBO.getPassword(), salt));
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
+        // 建立一个初步的用户和角色的关联
+        AuthRole authRole = new AuthRole();
+        authRole.setRoleKey(AuthConstant.NORMAL_USER);
+        AuthRole authRoleResult = authRoleService.queryByCondition(authRole);
+        Long roleId = authRoleResult.getId();
+        Long userId = authUser.getId();
+        AuthUserRole authUserRole = new AuthUserRole();
+        authUserRole.setUserId(userId);
+        authUserRole.setRoleId(roleId);
+        authUserRole.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
+        authUserRoleService.insert(authUserRole);
+        // 将当前注册用户的权限和角色放入Redis中
         return count > 0;
 
     }

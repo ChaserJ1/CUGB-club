@@ -25,7 +25,7 @@ public interface AuthUserDomainService {
     Boolean update(AuthUserBO authUserBO);
 
     /**
-     * 更新用户信息
+     * 删除用户信息
      */
     Boolean delete(AuthUserBO authUserBO);
 

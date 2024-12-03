@@ -27,10 +27,6 @@ spring:
           enabled: true
         config:
           enabled: true
-      #devtools:
-      #restart:
-      #enabled: true
-      #additional-paths: src/main/java
 
 
     # redis配置
