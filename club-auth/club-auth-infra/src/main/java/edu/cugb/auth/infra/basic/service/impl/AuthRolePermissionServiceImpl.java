@@ -77,4 +77,5 @@ public class AuthRolePermissionServiceImpl implements AuthRolePermissionService 
         return this.authRolePermissionDao.queryAllByLimit(authRolePermission);
     }
 
+
 }

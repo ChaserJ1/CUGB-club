@@ -46,6 +46,6 @@ public interface AuthPermissionService {
      */
     boolean deleteById(Long id);
 
-    List<AuthPermission> queryByRoleList(List<Long> roleIdList);
+    List<AuthPermission> queryByPermissionList(List<Long> permissionIdList);
 
 }

@@ -78,5 +78,5 @@ public interface AuthPermissionDao {
      */
     int deleteById(Long id);
 
-    List<AuthPermission> queryByRoleList(@Param("list") List<Long> roleIdList);
+    List<AuthPermission> queryByPermissionList(@Param("list") List<Long> permissionIdList);
 }

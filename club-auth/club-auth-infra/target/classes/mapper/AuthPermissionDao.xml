@@ -140,7 +140,7 @@
             </if>
         </where>
     </select>
-    <select id="queryByRoleList" resultMap="AuthPermissionMap">
+    <select id="queryByPermissionList" resultMap="AuthPermissionMap">
         select * from auth_permission
         where id in
         <foreach open="(" close=")" collection="list" item="id" separator=",">

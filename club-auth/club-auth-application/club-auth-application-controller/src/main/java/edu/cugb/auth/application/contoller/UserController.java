@@ -170,7 +170,7 @@ public class UserController {
     public SaResult doLogin(String username, String password) {
         if ("zhang".equals(username) && "123456".equals(password)) {
             // 第1步，先登录上
-            StpUtil.login(10001);
+            StpUtil.login("中国地质大学");
             // 第2步，获取 Token  相关参数
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
             // 第3步，返回给前端

@@ -1,5 +1,6 @@
 package edu.cugb.auth.infra.basic.mapper;
 
+import edu.cugb.auth.infra.basic.entity.AuthRole;
 import edu.cugb.auth.infra.basic.entity.AuthRolePermission;
 import org.apache.ibatis.annotations.Param;
 
@@ -75,4 +76,6 @@ public interface AuthRolePermissionDao {
      * @return 影响行数
      */
     int deleteById(Long id);
+
+
 }

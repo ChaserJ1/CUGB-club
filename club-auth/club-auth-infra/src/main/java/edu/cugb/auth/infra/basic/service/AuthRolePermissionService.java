@@ -1,6 +1,7 @@
 package edu.cugb.auth.infra.basic.service;
 
 
+import edu.cugb.auth.infra.basic.entity.AuthRole;
 import edu.cugb.auth.infra.basic.entity.AuthRolePermission;
 
 
