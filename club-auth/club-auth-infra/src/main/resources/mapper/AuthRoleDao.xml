@@ -93,10 +93,9 @@
     </select>
 
     <select id="queryByRoleList" resultMap="AuthRoleMap">
-        select *
-        from auth_role
+        select * from auth_role
         where id in
-        <foreach open="(" close=")" collection="list" item="id" separator=",">
+        <foreach collection="list" open="(" close=")" item="id" separator=",">
             #{id}
         </foreach>
     </select>

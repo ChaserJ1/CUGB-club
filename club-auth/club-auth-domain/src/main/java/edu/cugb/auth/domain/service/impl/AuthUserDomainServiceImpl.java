@@ -77,6 +77,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
+
         // 建立一个初步的用户和角色的关联
         AuthRole authRole = new AuthRole();
         authRole.setRoleKey(AuthConstant.NORMAL_USER);
@@ -88,7 +89,33 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUserRole.setRoleId(roleId);
         authUserRole.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
         authUserRoleService.insert(authUserRole);
-        // 将当前注册用户的权限和角色放入Redis中
+        // 将当前注册用户的角色和权限放入Redis中
+        //角色
+        //roleKey
+        String roleKey = redisUtil.buildKey(authRolePrefix, authUser.getUserName());
+        //roleValue
+        LinkedList<AuthRole> roleList = new LinkedList<>();
+        roleList.add(authRole);
+
+        redisUtil.set(roleKey, new Gson().toJson(roleList));
+
+        //权限
+        AuthRolePermission authRolePermission = new AuthRolePermission();
+        authRolePermission.setRoleId(roleId);
+        //根据roleId，从AuthRolePermission表中拿到所有符合条件的AuthRolePermission对应的permissionIdList
+        List<AuthRolePermission> rolePermissionList = authRolePermissionService.
+                queryByCondition(authRolePermission);
+        List<Long> permissionIdList = rolePermissionList.stream().
+                map(AuthRolePermission::getPermissionId).collect(Collectors.toList());
+
+        //根据permissionIdList查所有的权限实体类, 也就是对应的permissionValue
+        List<AuthPermission> permissionList = authPermissionService.queryByPermissionList(permissionIdList);
+
+        //permissionKey
+        String permissionKey = redisUtil.buildKey(authPermissionPrefix, authUser.getUserName());
+
+        redisUtil.set(permissionKey, new Gson().toJson(permissionList));
+
         return count > 0;
 
     }

@@ -65,7 +65,7 @@ public class AuthPermissionServiceImpl implements AuthPermissionService {
     }
 
     @Override
-    public List<AuthPermission> queryByRoleList(List<Long> roleIdList) {
-        return this.authPermissionDao.queryByRoleList(roleIdList);
+    public List<AuthPermission> queryByPermissionList(List<Long> permissionIdList) {
+        return this.authPermissionDao.queryByPermissionList(permissionIdList);
     }
 }
