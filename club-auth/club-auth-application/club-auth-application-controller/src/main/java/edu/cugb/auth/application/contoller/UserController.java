@@ -13,10 +13,7 @@ import edu.cugb.auth.domain.service.AuthUserDomainService;
 import edu.cugb.auth.infra.basic.service.AuthUserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -125,7 +122,7 @@ public class UserController {
     }
 
     @RequestMapping("/changeStatus")
-    public Result changeStatus(@RequestBody AuthUserDTO authUserDTO) {
+    public Result<Boolean> changeStatus(@RequestBody AuthUserDTO authUserDTO) {
         try {
             //日志输出
             if (log.isInfoEnabled()) {
@@ -150,33 +147,18 @@ public class UserController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 登录接口
     @RequestMapping("/doLogin")
-    public SaResult doLogin(String username, String password) {
-        if ("zhang".equals(username) && "123456".equals(password)) {
-            // 第1步，先登录上
-            StpUtil.login("中国地质大学");
-            // 第2步，获取 Token  相关参数
-            SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-            // 第3步，返回给前端
-            return SaResult.data(tokenInfo);
+    public Result<SaTokenInfo> doLogin(@RequestParam("validCode") String validCode) {
+        try {
+
+            Preconditions.checkArgument(!StringUtils.isBlank(validCode), "验证码不能为空");
+            return Result.ok(authUserDomainService.doLogin(validCode));
+        } catch (Exception e) {
+            log.error("UserController.doLogin.error:{}", e.getMessage(), e);
+            return Result.fail("用户登录失败");
         }
-        return SaResult.error("登录失败");
+
     }
 
     // 查询登录状态，浏览器访问： http://localhost:3011/user/isLogin

@@ -13,6 +13,7 @@
         <module name="club-auth-domain" />
         <module name="club-starter" />
         <module name="club-auth-application-controller" />
+        <module name="club-wx" />
         <module name="club-application-job" />
         <module name="club-gateway" />
         <module name="club-infra" />

@@ -73,7 +73,9 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
         //若用户不存在
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
-        authUser.setPassword(SaSecureUtil.md5BySalt(authUserBO.getPassword(), salt));
+        if (StringUtils.isNotBlank(authUser.getPassword())) {
+            authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), salt));
+        }
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
@@ -119,58 +121,6 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         return count > 0;
 
     }
-/*        //校验用户是否存在
-        AuthUser existAuthUser = new AuthUser();
-        existAuthUser.setUserName(authUserBO.getUserName());
-        List<AuthUser> existUser = authUserService.queryByCondition(existAuthUser);
-        if (existUser.size() > 0) {
-            return true;
-        }
-        AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
-        if (StringUtils.isNotBlank(authUser.getPassword())) {
-            authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), salt));
-        }
-        if (StringUtils.isBlank(authUser.getAvatar())) {
-            authUser.setAvatar("http://117.72.10.84:9000/user/icon/微信图片_20231203153718(1).png");
-        }
-        if (StringUtils.isBlank(authUser.getNickName())) {
-            authUser.setNickName("鸡翅粉丝");
-        }
-        authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
-        authUser.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-        Integer count = authUserService.insert(authUser);
-
-        //建立一个初步的角色的关联
-        AuthRole authRole = new AuthRole();
-        authRole.setRoleKey(AuthConstant.NORMAL_USER);
-        AuthRole roleResult = authRoleService.queryByCondition(authRole);
-        Long roleId = roleResult.getId();
-        Long userId = authUser.getId();
-        AuthUserRole authUserRole = new AuthUserRole();
-        authUserRole.setUserId(userId);
-        authUserRole.setRoleId(roleId);
-        authUserRole.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
-        authUserRoleService.insert(authUserRole);
-
-        String roleKey = redisUtil.buildKey(authRolePrefix, authUser.getUserName());
-        List<AuthRole> roleList = new LinkedList<>();
-        roleList.add(authRole);
-        redisUtil.set(roleKey, new Gson().toJson(roleList));
-
-        AuthRolePermission authRolePermission = new AuthRolePermission();
-        authRolePermission.setRoleId(roleId);
-        List<AuthRolePermission> rolePermissionList = authRolePermissionService.
-                queryByCondition(authRolePermission);
-
-        List<Long> permissionIdList = rolePermissionList.stream()
-                .map(AuthRolePermission::getPermissionId).collect(Collectors.toList());
-        //根据roleId查权限
-        List<AuthPermission> permissionList = authPermissionService.queryByRoleList(permissionIdList);
-        String permissionKey = redisUtil.buildKey(authPermissionPrefix, authUser.getUserName());
-        redisUtil.set(permissionKey, new Gson().toJson(permissionList));
-
-        return count > 0;*/
-
 
     @Override
     public Boolean update(AuthUserBO authUserBO) {
@@ -191,14 +141,19 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
     @Override
     public SaTokenInfo doLogin(String validCode) {
+        //根据验证码拿到用户的openId，对应user表中的username
         String loginKey = redisUtil.buildKey(LOGIN_PREFIX, validCode);
         String openId = redisUtil.get(loginKey);
         if (StringUtils.isBlank(openId)) {
             return null;
         }
+
+        //根据openId，给用户赋予权限
         AuthUserBO authUserBO = new AuthUserBO();
         authUserBO.setUserName(openId);
+        //把注册信息写入数据库
         this.register(authUserBO);
+
         StpUtil.login(openId);
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return tokenInfo;
