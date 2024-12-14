@@ -1,29 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="club-oss:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd7d480-3194-47a9-8732-0f86504db403" name="Changes" comment="feat: 刷题、鉴权、微信登录模块开发完毕">
-      <change afterPath="$PROJECT_DIR$/.idea/club.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/club_auth_starter_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/club_gateway_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/club_oss_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/club_starter_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/club_wx_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-auth/club-auth-starter/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-gateway/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/entity/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/entity/ResultCodeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-oss/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/club-wx/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-application/club-auth-application-controller/src/main/java/edu/cugb/auth/application/contoller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthUserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/src/main/resources/mapper/AuthUserDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-auth/club-auth-infra/target/classes/mapper/AuthUserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-auth/club-auth-infra/target/classes/mapper/AuthUserDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/AliStorageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/AliStorageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/MinioStorageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/MinioStorageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/StorageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/adapter/StorageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-oss/src/main/java/edu/cugb/oss/service/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/club-application-controller.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/controller/SubjectCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectCategoryDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/convert/SubjectCategoryDTOConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectCategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-application/club-application-controller/src/main/java/edu/cugb/subject/application/dto/SubjectCategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-job/club-application-job.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application-mq/club-application-mq.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-application/club-application.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-common/club-common.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/club-domain.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectCategoryBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/entity/SubjectCategoryBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectCategoryDomainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/SubjectCategoryDomainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectCategoryDomainServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-domain/src/main/java/edu/cugb/subject/domain/service/impl/SubjectCategoryDomainServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/club-infra.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/entity/SubjectCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectCategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/mapper/SubjectCategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/SubjectCategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/java/edu/cugb/subject/infra/basic/service/impl/SubjectCategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectCategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/src/main/resources/mapper/SubjectCategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectCategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/club-subject/club-infra/target/classes/mapper/SubjectCategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-starter/club-starter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-subject-api/club-subject-api.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-subject/club-subject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/club-wx/target/classes/application.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -33,27 +87,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.WxApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Maven.club-auth [clean].executor": "Run",
+    "Maven.club-auth [install].executor": "Run",
+    "Maven.club-gateway [clean].executor": "Run",
+    "Maven.club-gateway [install].executor": "Run",
+    "Maven.club-oss [clean].executor": "Run",
+    "Maven.club-oss [install].executor": "Run",
+    "Maven.club-subject [clean].executor": "Run",
+    "Maven.club-subject [install].executor": "Run",
+    "Maven.club-wx [clean].executor": "Run",
+    "Maven.club-wx [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.SubjectApplication.executor": "Run",
+    "Spring Boot.WxApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.35747126",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.cugb.oss.entity" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -62,7 +140,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.WxApplication">
+  <component name="RunManager" selected="Spring Boot.SubjectApplication">
     <configuration name="SubjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="club-starter" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="edu.cugb.subject.SubjectApplication" />
@@ -105,7 +183,9 @@
       <option name="presentableId" value="Default" />
       <updated>1733820279725</updated>
       <workItem from="1733820280920" duration="733000" />
-      <workItem from="1733836746249" duration="1192000" />
+      <workItem from="1733836746249" duration="8789000" />
+      <workItem from="1733911447437" duration="10659000" />
+      <workItem from="1734079464650" duration="13040000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 刷题、鉴权、微信登录模块开发完毕">
       <option name="closed" value="true" />
@@ -115,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733820663107</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: 刷题、鉴权、微信登录模块开发完毕">
+      <option name="closed" value="true" />
+      <created>1733887595105</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733887595106</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

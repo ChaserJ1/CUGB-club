@@ -77,5 +77,6 @@ public interface SubjectCategoryDao {
     List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
 
 
+    Integer queryCategoryCount(Long id);
 }
 

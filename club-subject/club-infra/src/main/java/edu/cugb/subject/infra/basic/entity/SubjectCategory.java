@@ -1,5 +1,7 @@
 package edu.cugb.subject.infra.basic.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -31,7 +33,7 @@ public class SubjectCategory implements Serializable {
      */
     private String imageUrl;
     /**
-     * 父级id
+     * 父级id(大类id)
      */
     private Long parentId;
     /**
@@ -51,9 +53,15 @@ public class SubjectCategory implements Serializable {
      */
     private Date updateTime;
     /**
+     * 分类题目数量
+     */
+    private Integer count;
+    /**
      * 是否删除 0: 未删除 1: 已删除
      */
     private Integer isDeleted;
+
+
 
 
 }

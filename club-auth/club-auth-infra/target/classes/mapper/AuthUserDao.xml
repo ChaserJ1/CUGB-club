@@ -45,9 +45,22 @@
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="AuthUserMap">
-        select
-        id, user_name, nick_name, email, phone, password, sex, avatar, status, introduce, ext_json, created_by,
-        created_time, update_by, update_time, is_deleted
+        select id,
+               user_name,
+               nick_name,
+               email,
+               phone,
+               password,
+               sex,
+               avatar,
+               status,
+               introduce,
+               ext_json,
+               created_by,
+               created_time,
+               update_by,
+               update_time,
+               is_deleted
         from auth_user
         <where>
             <if test="id != null">

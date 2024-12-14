@@ -1,8 +1,13 @@
 package edu.cugb.subject.application.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.sun.deploy.panel.ITreeNode;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 题目分类(SubjectCategory)实体类
@@ -30,13 +35,25 @@ public class SubjectCategoryDTO implements Serializable {
      */
     private String imageUrl;
     /**
-     * 父级id
+     * 父级id(大类id)
      */
     private Long parentId;
+    /**
+     * 大类题目数量
+     */
+    private Integer count;
     /**
      * 是否删除 0: 未删除 1: 已删除
      */
     private Integer isDeleted;
+
+    /**
+     * 标签信息
+     */
+    private List<SubjectLabelDTO> subjectLabelDTOList;
+
+
+
 
 
 }

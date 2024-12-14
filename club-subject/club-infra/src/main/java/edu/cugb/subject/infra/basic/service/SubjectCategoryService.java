@@ -54,4 +54,6 @@ public interface SubjectCategoryService {
     List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
 
     int delete(SubjectCategory subjectCategory);
+
+    Integer queryCategoryCount(Long id);
 }

@@ -80,4 +80,9 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
     public int delete(SubjectCategory subjectCategory) {
         return this.subjectCategoryDao.delete(subjectCategory);
     }
+
+    @Override
+    public Integer queryCategoryCount(Long id) {
+        return this.subjectCategoryDao.queryCategoryCount(id);
+    }
 }

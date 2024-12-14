@@ -153,6 +153,13 @@
             </if>
         </where>
     </select>
+    <select id="queryCategoryCount" resultType="java.lang.Integer">
+        select count(distinct subject_id)
+        from subject_mapping sm,
+             subject_label sl
+        where sm.label_id = sl.id
+            and sl.category_id = #{id}
+    </select>
 
 
     <!--新增所有列-->
