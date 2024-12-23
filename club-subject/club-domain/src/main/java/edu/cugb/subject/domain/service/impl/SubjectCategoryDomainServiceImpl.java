@@ -9,18 +9,25 @@ import edu.cugb.subject.domain.convert.SubjectLabelConverter;
 import edu.cugb.subject.domain.entity.SubjectCategoryBO;
 import edu.cugb.subject.domain.entity.SubjectLabelBO;
 import edu.cugb.subject.domain.service.SubjectCategoryDomainService;
+import edu.cugb.subject.domain.service.SubjectLabelDomainService;
 import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 import edu.cugb.subject.infra.basic.entity.SubjectLabel;
 import edu.cugb.subject.infra.basic.entity.SubjectMapping;
 import edu.cugb.subject.infra.basic.service.SubjectCategoryService;
 import edu.cugb.subject.infra.basic.service.SubjectLabelService;
 import edu.cugb.subject.infra.basic.service.SubjectMappingService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +45,9 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     @Resource
     private SubjectLabelService subjectLabelService;
+
+    @Resource
+    private ThreadPoolExecutor labelThreadPool;
 
     /**
      * 新增分类
@@ -58,6 +68,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     /**
      * 根据分类类型categoryType查询分类
+     *
      * @param subjectCategoryBO
      * @return
      */
@@ -115,10 +126,12 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     /**
      * 根据前端传来的大类id，查询分类、标签
+     *
      * @param subjectCategoryBO
      * @return
      */
     @Override
+    @SneakyThrows
     public List<SubjectCategoryBO> queryCategoryAndLabel(SubjectCategoryBO subjectCategoryBO) {
         //查询大类下所有分类
         SubjectCategory subjectCategory = new SubjectCategory();
@@ -130,19 +143,55 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                     JSON.toJSONString(subjectCategoryList));
         }
         List<SubjectCategoryBO> categoryBOList = SubjectCategoryConverter.INSTANCE.convertCategoryToBO(subjectCategoryList);
-        //依次获取标签信息 (待优化，目前每个分类都要与数据库做一次交互，后续考虑进行优化)
-        categoryBOList.forEach(categoryBo->{
-            SubjectMapping subjectMapping = new SubjectMapping();
-            subjectMapping.setCategoryId(categoryBo.getId());
-            List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
-            if (CollectionUtils.isEmpty(mappingList)){
-                return;
-            }
-            List<Long> labelIdList = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
-            List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
-            List<SubjectLabelBO> labelBOList = SubjectLabelConverter.INSTANCE.convertLabelListToBOList(labelList);
-            categoryBo.setSubjectLabelBOList(labelBOList);
+
+        //依次获取标签信息
+        List<FutureTask<Map<Long, List<SubjectLabelBO>>>> futureTaskList = new ArrayList<>();
+
+        HashMap<Long, List<SubjectLabelBO>> map = new HashMap<>();
+        //线程池并发调用,异步查询labelBOList
+        //1.将原有的单次从数据库中查询labelBOList的同步过程转换成为往线程池中提交任务的异步过程，
+        // 并将结果装入一个map中，K为categoryId，V为对应labelBOList，并将这个map装入futureTaskList数组中
+        categoryBOList.forEach(categoryBo -> {
+            FutureTask<Map<Long, List<SubjectLabelBO>>> futureTask = new FutureTask<>(() ->
+                    getLabelBOList(categoryBo)
+            );
+            futureTaskList.add(futureTask);
+            labelThreadPool.submit(futureTask);
         });
+        //2.遍历futureTaskList数组，将不为空的map存入一个新的map中
+        for (FutureTask<Map<Long, List<SubjectLabelBO>>> futureTask : futureTaskList) {
+            Map<Long, List<SubjectLabelBO>> resultMap = futureTask.get();
+            if (CollectionUtils.isEmpty(resultMap)) {
+                continue;
+            }
+            map.putAll(resultMap);
+        }
+        //3.对categoryBOList循环遍历，将新map中的labelBOList插入对应的category中
+        categoryBOList.forEach(categoryBO -> {
+            categoryBO.setSubjectLabelBOList(map.get(categoryBO.getId()));
+        });
+        //这样就可以一次性查询到分类以及分类下的标签
         return categoryBOList;
+    }
+
+    /**
+     * 根据CategoryId拿到对应的labelBOList，放入map中返回
+     *
+     * @param categoryBO
+     * @return
+     */
+    private Map<Long, List<SubjectLabelBO>> getLabelBOList(SubjectCategoryBO categoryBO) {
+        Map<Long, List<SubjectLabelBO>> labelMap = new HashMap<>();
+        SubjectMapping subjectMapping = new SubjectMapping();
+        subjectMapping.setCategoryId(categoryBO.getId());
+        List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+        if (CollectionUtils.isEmpty(mappingList)) {
+            return null;
+        }
+        List<Long> labelIdList = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
+        List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
+        List<SubjectLabelBO> labelBOList = SubjectLabelConverter.INSTANCE.convertLabelListToBOList(labelList);
+        labelMap.put(categoryBO.getId(), labelBOList);
+        return labelMap;
     }
 }

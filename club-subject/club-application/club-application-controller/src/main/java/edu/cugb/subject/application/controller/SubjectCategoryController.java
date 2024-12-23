@@ -29,7 +29,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/subject/category")
 @Slf4j
-
 public class SubjectCategoryController {
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
