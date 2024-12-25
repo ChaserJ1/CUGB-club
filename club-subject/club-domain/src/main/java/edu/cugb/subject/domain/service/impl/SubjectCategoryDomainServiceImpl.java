@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
@@ -143,11 +145,32 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                     JSON.toJSONString(subjectCategoryList));
         }
         List<SubjectCategoryBO> categoryBOList = SubjectCategoryConverter.INSTANCE.convertCategoryToBO(subjectCategoryList);
+        HashMap<Long, List<SubjectLabelBO>> map = new HashMap<>();
+        //创建了一个包含 CompletableFuture 对象的列表，
+        // 每个 CompletableFuture 都会在 labelThreadPool 线程池中
+        // 异步执行 getLabelBOList(categoryBO) 操作
+        List<CompletableFuture<Map<Long, List<SubjectLabelBO>>>> completableFutureList =
+                categoryBOList.stream()
+                .map(categoryBO -> CompletableFuture.supplyAsync(
+                        () -> getLabelBOList(categoryBO),
+                        labelThreadPool
+                ))
+                .collect(Collectors.toList());
+        //completableFutureList数组，将数组中的每个元素的map存入一个新的hashmap集合中
+        completableFutureList.forEach(mapCompletableFuture -> {
+                    try {
+                        Map<Long, List<SubjectLabelBO>> resultMap = mapCompletableFuture.get();
+                        map.putAll(resultMap);
+                    } catch (InterruptedException | ExecutionException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
 
         //依次获取标签信息
-        List<FutureTask<Map<Long, List<SubjectLabelBO>>>> futureTaskList = new ArrayList<>();
+       /* List<FutureTask<Map<Long, List<SubjectLabelBO>>>> futureTaskList = new ArrayList<>();
 
-        HashMap<Long, List<SubjectLabelBO>> map = new HashMap<>();
+
         //线程池并发调用,异步查询labelBOList
         //1.将原有的单次从数据库中查询labelBOList的同步过程转换成为往线程池中提交任务的异步过程，
         // 并将结果装入一个map中，K为categoryId，V为对应labelBOList，并将这个map装入futureTaskList数组中
@@ -165,7 +188,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                 continue;
             }
             map.putAll(resultMap);
-        }
+        }*/
         //3.对categoryBOList循环遍历，将新map中的labelBOList插入对应的category中
         categoryBOList.forEach(categoryBO -> {
             categoryBO.setSubjectLabelBOList(map.get(categoryBO.getId()));
@@ -181,6 +204,9 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
      * @return
      */
     private Map<Long, List<SubjectLabelBO>> getLabelBOList(SubjectCategoryBO categoryBO) {
+        if (log.isInfoEnabled()){
+            log.info("getLabelBOList:{}",JSON.toJSONString(categoryBO));
+        }
         Map<Long, List<SubjectLabelBO>> labelMap = new HashMap<>();
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setCategoryId(categoryBO.getId());

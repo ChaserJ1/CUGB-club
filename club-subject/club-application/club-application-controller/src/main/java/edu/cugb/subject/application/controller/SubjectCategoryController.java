@@ -2,7 +2,6 @@ package edu.cugb.subject.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.google.common.base.Preconditions;
 import edu.cugb.subject.application.convert.SubjectCategoryDTOConverter;
 import edu.cugb.subject.application.convert.SubjectLabelDTOConverter;
@@ -11,10 +10,10 @@ import edu.cugb.subject.application.dto.SubjectLabelDTO;
 import edu.cugb.subject.common.entity.Result;
 import edu.cugb.subject.domain.entity.SubjectCategoryBO;
 import edu.cugb.subject.domain.service.SubjectCategoryDomainService;
-import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

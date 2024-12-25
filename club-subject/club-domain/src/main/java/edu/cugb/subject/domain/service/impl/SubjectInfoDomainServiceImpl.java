@@ -1,18 +1,14 @@
 package edu.cugb.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.cugb.subject.common.entity.PageResult;
 import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
 import edu.cugb.subject.domain.convert.SubjectInfoConverter;
-import edu.cugb.subject.domain.convert.SubjectLabelConverter;
 import edu.cugb.subject.domain.entity.SubjectInfoBO;
-import edu.cugb.subject.domain.entity.SubjectLabelBO;
 import edu.cugb.subject.domain.entity.SubjectOptionBO;
 import edu.cugb.subject.domain.handler.subject.SubjectHandlerFactory;
 import edu.cugb.subject.domain.handler.subject.SubjectTypeHandler;
 import edu.cugb.subject.domain.service.SubjectInfoDomainService;
-import edu.cugb.subject.domain.service.SubjectLabelDomainService;
 import edu.cugb.subject.infra.basic.entity.SubjectInfo;
 import edu.cugb.subject.infra.basic.entity.SubjectLabel;
 import edu.cugb.subject.infra.basic.entity.SubjectMapping;
@@ -23,11 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * @Author pengjia
  * @Data 2024/10/17 14:39
- * @Description:wwww
+ * @Description:
  */
 @Service
 @Slf4j
