@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface SubjectCategoryDomainService {
 
+
     /**
      * 新增分类
      *

@@ -2,14 +2,14 @@ package edu.cugb.auth.application.contoller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import edu.cugb.auth.application.convert.AuthUserDTOConverter;
-import edu.cugb.auth.application.dto.AuthUserDTO;
-import edu.cugb.auth.common.entity.Result;
+
+import edu.cugb.auth.entity.Result;
 import edu.cugb.auth.domain.entity.AuthUserBO;
 import edu.cugb.auth.domain.service.AuthUserDomainService;
+import edu.cugb.auth.entity.AuthUserDTO;
 import edu.cugb.auth.infra.basic.service.AuthUserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,6 @@ public class UserController {
 
     /**
      * 用户信息校验
-     *
      * @param authUserDTO
      */
     private void checkUserInfo(@RequestBody AuthUserDTO authUserDTO) {
@@ -39,7 +38,6 @@ public class UserController {
 
     /**
      * 用户注册接口
-     *
      * @param authUserDTO
      * @return
      */
@@ -111,7 +109,6 @@ public class UserController {
 
     /**
      * 修改用户信息接口
-     *
      * @param authUserDTO
      * @return
      */

@@ -29,8 +29,8 @@ public class StpInterfaceImpl implements StpInterface {
     @Resource
     private RedisUtil redisUtil;
 
-    private String authPermissionPrefix = "auth.permission";
-    private String authRolePrefix = "auth.role";
+    private final String authPermissionPrefix = "auth.permission";
+    private final String authRolePrefix = "auth.role";
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {

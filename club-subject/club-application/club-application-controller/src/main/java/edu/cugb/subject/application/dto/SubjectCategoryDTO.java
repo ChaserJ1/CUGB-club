@@ -1,12 +1,9 @@
 package edu.cugb.subject.application.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.sun.deploy.panel.ITreeNode;
+
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +48,7 @@ public class SubjectCategoryDTO implements Serializable {
      * 标签信息
      */
     private List<SubjectLabelDTO> subjectLabelDTOList;
+
 
 
 

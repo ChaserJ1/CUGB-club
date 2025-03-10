@@ -1,7 +1,6 @@
-package edu.cugb.auth.common.entity;
+package edu.cugb.auth.entity;
 
 
-import edu.cugb.auth.common.enums.ResultCodeEnum;
 import lombok.Data;
 
 /**

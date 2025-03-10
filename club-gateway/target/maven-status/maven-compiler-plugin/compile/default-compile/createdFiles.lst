@@ -1,0 +1,12 @@
+edu\cugb\gateway\entity\AuthPermission.class
+edu\cugb\gateway\auth\StpInterfaceImpl$1.class
+edu\cugb\gateway\auth\SaTokenConfigure.class
+edu\cugb\gateway\GatewayApplication.class
+edu\cugb\gateway\redis\RedisUtil.class
+edu\cugb\gateway\auth\StpInterfaceImpl$2.class
+edu\cugb\gateway\entity\Result.class
+edu\cugb\gateway\auth\StpInterfaceImpl.class
+edu\cugb\gateway\enums\ResultCodeEnum.class
+edu\cugb\gateway\redis\RedisConfig.class
+edu\cugb\gateway\entity\AuthRole.class
+edu\cugb\gateway\exception\GatewayExceptionHandler.class

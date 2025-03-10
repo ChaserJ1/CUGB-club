@@ -1,4 +1,4 @@
-package edu.cugb.auth.application.dto;
+package edu.cugb.auth.entity;
 
 import lombok.Data;
 

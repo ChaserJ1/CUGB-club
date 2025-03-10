@@ -1,0 +1,4 @@
+edu\cugb\auth\entity\AuthUserDTO.class
+edu\cugb\auth\entity\Result.class
+edu\cugb\auth\entity\ResultCodeEnum.class
+edu\cugb\auth\api\UserFeignService.class

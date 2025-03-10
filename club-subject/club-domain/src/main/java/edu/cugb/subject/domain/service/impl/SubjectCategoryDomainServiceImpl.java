@@ -1,6 +1,9 @@
 package edu.cugb.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.mysql.cj.xdevapi.JsonArray;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import edu.cugb.subject.common.enums.CategoryTypeEnum;
 import edu.cugb.subject.common.enums.IsDeletedFlagEnum;
@@ -10,6 +13,7 @@ import edu.cugb.subject.domain.entity.SubjectCategoryBO;
 import edu.cugb.subject.domain.entity.SubjectLabelBO;
 import edu.cugb.subject.domain.service.SubjectCategoryDomainService;
 import edu.cugb.subject.domain.service.SubjectLabelDomainService;
+import edu.cugb.subject.domain.service.util.CacheUtil;
 import edu.cugb.subject.infra.basic.entity.SubjectCategory;
 import edu.cugb.subject.infra.basic.entity.SubjectLabel;
 import edu.cugb.subject.infra.basic.entity.SubjectMapping;
@@ -18,18 +22,14 @@ import edu.cugb.subject.infra.basic.service.SubjectLabelService;
 import edu.cugb.subject.infra.basic.service.SubjectMappingService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
@@ -50,6 +50,13 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     @Resource
     private ThreadPoolExecutor labelThreadPool;
+
+    @Resource
+    private CacheUtil cacheUtil;
+
+
+
+
 
     /**
      * 新增分类
@@ -135,9 +142,18 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     @SneakyThrows
     public List<SubjectCategoryBO> queryCategoryAndLabel(SubjectCategoryBO subjectCategoryBO) {
+        //本地缓存
+        String cacheKey = "categoryAndLabel." + subjectCategoryBO.getId();
+        List<SubjectCategoryBO> SubjectCategoryBOS = cacheUtil.getResult(cacheKey, SubjectCategoryBO.class,
+                (key) -> getSubjectCategoryBOS(subjectCategoryBO.getId()));
+        return SubjectCategoryBOS;
+    }
+
+    @NotNull
+    private List<SubjectCategoryBO> getSubjectCategoryBOS(Long categoryId) {
         //查询大类下所有分类
         SubjectCategory subjectCategory = new SubjectCategory();
-        subjectCategory.setParentId(subjectCategoryBO.getId());
+        subjectCategory.setParentId(categoryId);
         subjectCategory.setIsDeleted(IsDeletedFlagEnum.Un_DELETED.getCode());
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
         if (log.isInfoEnabled()) {

@@ -1,0 +1,4 @@
+edu\cugb\auth\common\enums\AuthUserStatusEnum.class
+edu\cugb\auth\common\enums\IsDeletedFlagEnum.class
+edu\cugb\auth\common\entity\PageResult.class
+edu\cugb\auth\common\entity\PageInfo.class

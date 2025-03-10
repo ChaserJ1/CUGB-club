@@ -22,7 +22,6 @@ import java.util.List;
 
 /**
  * @Author pengjia
- * @Data 2024/10/17 15:47
  * @Description: 刷题分类Controller
  */
 @RestController
@@ -32,10 +31,8 @@ public class SubjectCategoryController {
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
-
     /**
      * 新增分类
-     *
      * @param subjectCategoryDTO
      * @return
      */
@@ -61,7 +58,7 @@ public class SubjectCategoryController {
     /**
      * 查询大类
      *
-     * @return
+     * @return subjectCategoryDTOList
      */
     @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO ) {

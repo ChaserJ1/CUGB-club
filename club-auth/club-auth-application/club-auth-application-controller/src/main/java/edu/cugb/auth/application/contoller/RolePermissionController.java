@@ -2,18 +2,12 @@ package edu.cugb.auth.application.contoller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
-import edu.cugb.auth.application.convert.AuthPermissionDTOConverter;
 import edu.cugb.auth.application.convert.AuthRolePermissionDTOConverter;
-import edu.cugb.auth.application.dto.AuthPermissionDTO;
 import edu.cugb.auth.application.dto.AuthRolePermissionDTO;
-import edu.cugb.auth.common.entity.Result;
-import edu.cugb.auth.domain.entity.AuthPermissionBO;
+import edu.cugb.auth.entity.Result;
 import edu.cugb.auth.domain.entity.AuthRolePermissionBO;
-import edu.cugb.auth.domain.service.AuthPermissionDomainService;
 import edu.cugb.auth.domain.service.AuthRolePermissionDomainService;
-import edu.cugb.auth.infra.basic.entity.AuthRole;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +17,6 @@ import javax.annotation.Resource;
 
 /**
  * 角色权限关联controller
- *
- * @author: ChickenWing
- * @date: 2023/11/2
  */
 @RestController
 @RequestMapping("/rolePermission")

@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * @Author pengjia
- * @Data 2024/10/31 22:00
  * @Description: mvc的全局处理
  */
 @Configuration

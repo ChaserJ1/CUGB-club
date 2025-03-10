@@ -1,0 +1,12 @@
+edu\cugb\oss\entity\ResultCodeEnum.class
+edu\cugb\oss\util\MinioUtil.class
+edu\cugb\oss\OssApplication.class
+edu\cugb\oss\adapter\MinioStorageAdapter.class
+edu\cugb\oss\adapter\StorageAdapter.class
+edu\cugb\oss\service\FileService.class
+edu\cugb\oss\config\MinioConfig.class
+edu\cugb\oss\entity\Result.class
+edu\cugb\oss\adapter\AliStorageAdapter.class
+edu\cugb\oss\config\StorageConfig.class
+edu\cugb\oss\entity\FileInfo.class
+edu\cugb\oss\controller\FileController.class

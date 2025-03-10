@@ -1,22 +1,14 @@
 package edu.cugb.auth.application.contoller;
 
-import cn.dev33.satoken.stp.SaTokenInfo;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import edu.cugb.auth.application.convert.AuthRoleDTOConverter;
-import edu.cugb.auth.application.convert.AuthUserDTOConverter;
 import edu.cugb.auth.application.dto.AuthRoleDTO;
-import edu.cugb.auth.application.dto.AuthUserDTO;
-import edu.cugb.auth.common.entity.Result;
+import edu.cugb.auth.entity.Result;
 import edu.cugb.auth.domain.entity.AuthRoleBO;
-import edu.cugb.auth.domain.entity.AuthUserBO;
 import edu.cugb.auth.domain.service.AuthRoleDomainService;
-import edu.cugb.auth.domain.service.AuthUserDomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

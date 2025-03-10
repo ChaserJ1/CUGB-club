@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
 import edu.cugb.auth.application.convert.AuthPermissionDTOConverter;
 import edu.cugb.auth.application.dto.AuthPermissionDTO;
-import edu.cugb.auth.common.entity.Result;
+import edu.cugb.auth.entity.Result;
 import edu.cugb.auth.domain.entity.AuthPermissionBO;
 import edu.cugb.auth.domain.service.AuthPermissionDomainService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * 权限controller
- *
- * @author: ChickenWing
- * @date: 2023/11/2
+ * @Author pengjia
  */
 @RestController
 @RequestMapping("/permission")
@@ -53,6 +50,7 @@ public class PermissionController {
      */
     @RequestMapping("/update")
     public Result<Boolean> update(@RequestBody AuthPermissionDTO authPermissionDTO) {
+        //日志，鉴权
         try {
             if (log.isInfoEnabled()) {
                 log.info("PermissionController.update.dto:{}", JSON.toJSONString(authPermissionDTO));

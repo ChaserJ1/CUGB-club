@@ -1,0 +1,16 @@
+edu\cugb\auth\application\config\GlobalCConfig.class
+edu\cugb\auth\application\convert\AuthUserDTOConverter.class
+edu\cugb\auth\application\contoller\RoleController.class
+edu\cugb\auth\application\convert\AuthUserDTOConverterImpl.class
+edu\cugb\auth\application\dto\AuthPermissionDTO.class
+edu\cugb\auth\application\contoller\RolePermissionController.class
+edu\cugb\auth\application\dto\AuthRoleDTO.class
+edu\cugb\auth\application\contoller\UserController.class
+edu\cugb\auth\application\convert\AuthPermissionDTOConverterImpl.class
+edu\cugb\auth\application\convert\AuthRolePermissionDTOConverterImpl.class
+edu\cugb\auth\application\convert\AuthRolePermissionDTOConverter.class
+edu\cugb\auth\application\contoller\PermissionController.class
+edu\cugb\auth\application\convert\AuthPermissionDTOConverter.class
+edu\cugb\auth\application\convert\AuthRoleDTOConverter.class
+edu\cugb\auth\application\convert\AuthRoleDTOConverterImpl.class
+edu\cugb\auth\application\dto\AuthRolePermissionDTO.class

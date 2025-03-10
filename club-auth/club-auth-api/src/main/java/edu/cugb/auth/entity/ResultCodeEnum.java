@@ -1,4 +1,4 @@
-package edu.cugb.auth.common.enums;
+package edu.cugb.auth.entity;
 
 import lombok.Getter;
 

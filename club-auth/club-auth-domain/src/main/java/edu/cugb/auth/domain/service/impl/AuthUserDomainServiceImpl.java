@@ -54,8 +54,6 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
     private final String authPermissionPrefix = "auth.permission";
 
-    private final String authRolePrefix = "auth.role";
-
     private static final String LOGIN_PREFIX = "loginCode";
 
     @Override
@@ -94,6 +92,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         // 将当前注册用户的角色和权限放入Redis中
         //角色
         //roleKey
+        String authRolePrefix = "auth.role";
         String roleKey = redisUtil.buildKey(authRolePrefix, authUser.getUserName());
         //roleValue
         LinkedList<AuthRole> roleList = new LinkedList<>();
