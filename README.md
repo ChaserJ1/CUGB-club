@@ -1,6 +1,2 @@
-# 力扣牛
-
-第一期完成。
-待优化项：
-1、实现jenkins自动部署
-2、通过miniomc突破7天限制
+# CUGB club
+后期打算增加es、mq、xxljob以及zset实现排行榜功能
